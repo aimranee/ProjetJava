@@ -3,7 +3,7 @@ package Admin;
 public class Admin {
     private int id;
     private String nom;
-    private String prenom;
+    private String prenom;            
     private int postE_id;
 
     public Admin(int id, String nom, String prenom, int postE_id) {
