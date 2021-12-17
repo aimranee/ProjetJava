@@ -3,8 +3,8 @@ package Admin;
 public class Admin {
     private int id;
     private String nom;
-    private String prenom;
-    private int postE_id;
+    private String prenom;            
+    private int postE_idd;
 
     public Admin(int id, String nom, String prenom, int postE_id) {
         this.id = id;
