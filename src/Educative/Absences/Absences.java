@@ -1,7 +1,7 @@
 package Educative.Absences;
 
 public class Absences {
-    private int idaa;
+    private int id;
     private String dateAbsence;
     private String description;
 
