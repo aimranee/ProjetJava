@@ -7,25 +7,25 @@ public class Resultat {
     private int noteQuran;
     private int noteMouton;
     private int noteGeneral;
-    private int etudiantid;
+    private int etudiantId;
 
-    public Resultat(String commentaire, int noteAbsnce, int noteQuran, int noteMouton, int noteGeneral, int etudiantid) {
+    public Resultat(String commentaire, int noteAbsnce, int noteQuran, int noteMouton, int noteGeneral, int etudiantId) {
         this.commentaire = commentaire;
         this.noteAbsnce = noteAbsnce;
         this.noteQuran = noteQuran;
         this.noteMouton = noteMouton;
         this.noteGeneral = noteGeneral;
-        this.etudiantid = etudiantid;
+        this.etudiantId = etudiantId;
     }
 
-    public Resultat(int id, String commentaire, int noteAbsnce, int noteQuran, int noteMouton, int noteGeneral, int etudiantid) {
+    public Resultat(int id, String commentaire, int noteAbsnce, int noteQuran, int noteMouton, int noteGeneral, int etudiantId) {
         this.id = id;
         this.commentaire = commentaire;
         this.noteAbsnce = noteAbsnce;
         this.noteQuran = noteQuran;
         this.noteMouton = noteMouton;
         this.noteGeneral = noteGeneral;
-        this.etudiantid = etudiantid;
+        this.etudiantId = etudiantId;
     }
 
     public int getId() {
@@ -76,11 +76,11 @@ public class Resultat {
         this.noteGeneral = noteGeneral;
     }
 
-    public int getEtudiantid() {
-        return etudiantid;
+    public int getEtudiantId() {
+        return etudiantId;
     }
 
-    public void setEtudiantid(int etudiantid) {
-        this.etudiantid = etudiantid;
+    public void setEtudiantId(int etudiantId) {
+        this.etudiantId = etudiantId;
     }
 }
