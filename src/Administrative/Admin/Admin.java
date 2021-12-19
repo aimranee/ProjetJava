@@ -1,4 +1,4 @@
-package Admin;
+package Administrative.Admin;
 
 public class Admin {
     private int id;

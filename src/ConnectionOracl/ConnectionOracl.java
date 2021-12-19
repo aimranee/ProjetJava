@@ -11,7 +11,7 @@ public class ConnectionOracl {
         try{
             Class.forName("oracle.jdbc.driver.OracleDriver");
             System.out.println("Drive OK");
-            con= DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","aimrane","a1176849");
+            con= DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","miniProjet","123456");
             System.out.println("connection DB OK");
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
