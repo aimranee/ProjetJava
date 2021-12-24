@@ -16,12 +16,8 @@ public class Connect {
 			System.out.println("Problème au niveau du SQL EXCEPTION");
 		}
 	}
-
 	public static Connection getCon(){
 		return con;
 	}
 	
-
 }
-
-
