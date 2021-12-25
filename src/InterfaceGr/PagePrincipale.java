@@ -1,4 +1,4 @@
-package InterfaceGraphique.PagePrincipale;
+package InterfaceGr;
 
 public class PagePrincipale extends javax.swing.JFrame {
 
