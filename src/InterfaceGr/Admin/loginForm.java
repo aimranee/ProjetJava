@@ -1,6 +1,9 @@
-package InterfaceGr.Prof;
-
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package InterfaceGr.Admin;
 
 import javax.swing.JOptionPane;
 
@@ -11,13 +14,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class LoginProf extends javax.swing.JFrame {
+public class loginForm extends javax.swing.JFrame {
 
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
     
-    public LoginProf() {
+    public loginForm() {
         initComponents();
        Connection con = Connect.getCon();
     }
@@ -38,6 +41,7 @@ public class LoginProf extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtUname = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        txtPass = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -54,7 +58,7 @@ public class LoginProf extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Login Prof !");
+        jLabel1.setText("Login admin !");
 
         lblClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Cancel_Icon.png"))); // NOI18N
         lblClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -93,13 +97,20 @@ public class LoginProf extends javax.swing.JFrame {
         txtUname.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         txtUname.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 2, 1, new java.awt.Color(153, 153, 153)));
 
+        jLabel4.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel4.setText("Password :");
+
+        txtPass.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtPass.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 2, 1, new java.awt.Color(153, 153, 153)));
+
         jLabel5.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(153, 153, 153));
         jLabel5.setText("Forgot");
 
         jLabel6.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 102, 0));
-        jLabel6.setText("Username ?");
+        jLabel6.setText("Password ?");
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -152,6 +163,7 @@ public class LoginProf extends javax.swing.JFrame {
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel6))
+                            .addComponent(txtPass)
                             .addComponent(jLabel4)
                             .addComponent(txtUname)
                             .addComponent(jLabel3)))
@@ -174,6 +186,7 @@ public class LoginProf extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -205,13 +218,17 @@ public class LoginProf extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String uname = txtUname.getText();
+        String pass = String.valueOf(txtPass.getPassword());
         if (uname.equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(null, "Please enter Username");
+        } else if (pass.equals("")) {
+            JOptionPane.showMessageDialog(null, "Please enter Password");
         } else {
             try {
                 String sql = "SELECT * FROM `user` WHERE `uname` = ? AND `pass` = ?";
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, uname);
+                ps.setString(2, pass);
                 rs = ps.executeQuery();
                 if (rs.next()) {
                     String name = rs.getString(3);
@@ -222,7 +239,7 @@ public class LoginProf extends javax.swing.JFrame {
 //                    this.dispose();
                     
                 } else {
-                    JOptionPane.showMessageDialog(null, "Username is incorect");
+                    JOptionPane.showMessageDialog(null, "Username or Password is incorect");
                 }
                 
             } catch (Exception ex) {
@@ -233,10 +250,10 @@ public class LoginProf extends javax.swing.JFrame {
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO add your handling code here:
-//        signupForm s = new signupForm();
-//        s.setVisible(true);
-//        this.dispose();
-    }
+        signupForm s = new signupForm();
+        s.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel7MouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         // TODO add your handling code here:
@@ -267,20 +284,20 @@ public class LoginProf extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(loginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(loginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(loginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginProf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(loginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoginProf().setVisible(true);
+                new loginForm().setVisible(true);
             }
         });
     }
@@ -297,81 +314,7 @@ public class LoginProf extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel lblClose;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JPasswordField txtPass;
     private javax.swing.JTextField txtUname;
     // End of variables declaration//GEN-END:variables
 }
-
-    
-    //test username prof from base de donnee ==> 
-
-    /* String sql = "Select * from users where username = ? and password = ?";
-    String sql1 = "select type from users WHERE username ='"+textnom.getText()+"'";
-    try{  
-            Class.forName("com.mysql.jdbc.Driver");
-            con= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/gestionrestaurant","root","");
-            
-        pst=con.prepareStatement(sql);
-        pst1=con.prepareStatement(sql1);
-        pst.setString(1, textnom.getText());
-        char[] ps=textmotdepasse.getPassword();
-        String pss =new String(ps);
-        pst.setString(2, pss);
-        //System.out.println(textmotdepasse1.getPassword());
-        rs = pst.executeQuery();
-        rs1 = pst1.executeQuery();            
-        while(rs1.next()){
-            type = rs1.getString("type");
-        }
-        if(rs.next()){
-            nom=textnom.getText();
-            mp=textmotdepasse.getText();
-        if(type.equals("cis")){
-            this.setVisible(false);
-            Cuisinier.Accueil paca = new Cuisinier.Accueil();
-            paca.setVisible(true);
-        }
-        if(type.equals("cui")){
-            this.setVisible(false);
-            Caisier.Accueil pace = new Caisier.Accueil ();
-            pace.setVisible(true);
-        }
-        if(type.equals("ser")){
-            this.setVisible(false);
-            Serveuse.Accueil pacs = new Serveuse.Accueil();
-            pacs.setVisible(true);
-        }
-        }else{
-            nom=textnom.getText();
-            mp=textmotdepasse.getText();
-            if((nom.length()!=0)||(mp.length()!=0)){
-            fay.setText("nom ou bien le mot de passe n'est pas correct !!!!");
-            //textnom.setBackground(Color.red);
-            //textmotdepasse.setBackground(Color.red);
-            fay.setForeground(Color.RED);
-            }else{
-            //textnom.setBackground(Color.red);
-            //textmotdepasse.setBackground(Color.red);
-            fay.setForeground(Color.RED);
-            if((nom.length()==0)&&(mp.length()==0)){
-                fay.setText("les champs est vide !!!!");
-            }
-            if(nom.length()==0){
-                  fay.setText("le champs de votre nom est vide !!!!");  
-                  
-            }
-            if((mp.length()==0)){
-                  fay.setText("le champs de votre mot de passe est vide !!!!");
-            }
-            
-            }
-        
-        }
-            //JOptionPane.showMessageDialog(null, "nom et le mot de passe et n'est pas correct !!!! ")
-        st = con.createStatement();
-    }catch(Exception e){
-        System.out.printf("erreur   "+e.getMessage());//getMessage c'est une fonction  pour afficher l'Erreur ou se trouve ?!!!!!
-        JOptionPane.showMessageDialog(null, "Erreur de connexion\n  "+ e.getMessage());
-    }        // TODO add your handling code here:
-    }
-    */
-

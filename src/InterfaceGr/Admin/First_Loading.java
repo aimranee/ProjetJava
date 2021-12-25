@@ -139,7 +139,7 @@ public class First_Loading extends javax.swing.JFrame {
        }catch(Exception e){
            System.out.println("error dans loading !!");
        }
-       Login login = new Login();
+       loginForm login = new loginForm();
        login.setVisible(true);
        login.setBounds(300, 90, 500, 600);
        login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
