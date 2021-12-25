@@ -1,6 +1,9 @@
 package InterfaceGr.Admin;
 
 import javax.swing.*;
+
+import InterfaceGr.PageMenu;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +11,7 @@ import java.awt.event.ActionListener;
 public class Login extends JFrame implements ActionListener {
 
     Container container = getContentPane();
+    JLabel jLabel1 = new JLabel("Login Admin");
     JLabel userLabel = new JLabel("USERNAME");
     JLabel passwordLabel = new JLabel("PASSWORD");
     JTextField userTextField = new JTextField();
@@ -37,6 +41,10 @@ public class Login extends JFrame implements ActionListener {
         showPassword.setBounds(150, 250, 150, 30);
         loginButton.setBounds(50, 300, 100, 30);
         resetButton.setBounds(200, 300, 100, 30);
+		jLabel1.setFont(new java.awt.Font("Doppio One", 1, 30)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 225));
+        jLabel1.setText("Login Admin");
+        jLabel1.setBounds(120, 20, 300, 100);
 
 
     }
@@ -49,6 +57,7 @@ public class Login extends JFrame implements ActionListener {
         container.add(showPassword);
         container.add(loginButton);
         container.add(resetButton);
+        container.add(jLabel1);
     }
 
     public void addActionEvent() {
@@ -67,6 +76,9 @@ public class Login extends JFrame implements ActionListener {
             pwdText = passwordField.getText();
             if (userText.equalsIgnoreCase("admin") && pwdText.equalsIgnoreCase("123")) {
                 JOptionPane.showMessageDialog(this, "Login Successful");
+                PageMenu pm = new PageMenu();
+                this.dispose();
+                pm.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid Username or Password");
             }
@@ -90,7 +102,7 @@ public class Login extends JFrame implements ActionListener {
 
     public static void main(String[] a) {
         Login frame = new Login();
-        frame.setTitle("Login Form");
+        frame.setTitle("Login Form admin");
         frame.setVisible(true);
         frame.setBounds(300, 90, 500, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
