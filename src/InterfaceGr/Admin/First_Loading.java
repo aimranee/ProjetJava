@@ -1,10 +1,19 @@
 package InterfaceGr.Admin;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class First_Loading extends javax.swing.JFrame {
 
-  
+	 	private javax.swing.JLabel jLabel1;
+	    private javax.swing.JLabel jLabel3;
+	    private javax.swing.JLabel jLabel4;
+	    private javax.swing.JPanel jPanel1;
+	    private javax.swing.JPanel pp;
+	    private javax.swing.JLabel ppp;
+	    private javax.swing.JProgressBar tele;
+	    
     public First_Loading() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -20,9 +29,16 @@ public class First_Loading extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         ppp = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        JLabel display ;
+        ImageIcon image;
+        
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
+        image  = new ImageIcon(getClass().getResource("logoD2.jpg"));
+        
+        display = new JLabel(image);
+        add(display);
+        this.pack();
         pp.setBackground(new java.awt.Color(255, 255, 255));
         pp.setForeground(new java.awt.Color(0, 102, 205));
 
@@ -43,7 +59,7 @@ public class First_Loading extends javax.swing.JFrame {
         ppp.setForeground(new java.awt.Color(0, 51, 255));
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 255));
-
+        
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -131,13 +147,5 @@ public class First_Loading extends javax.swing.JFrame {
        telech.dispose();
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel pp;
-    private javax.swing.JLabel ppp;
-    private javax.swing.JProgressBar tele;
-    // End of variables declaration//GEN-END:variables
+   
 }
