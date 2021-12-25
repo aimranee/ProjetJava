@@ -13,6 +13,7 @@ public class TraitementEtudaint implements IDao<Etudiants> {
 
     @Override
     public boolean createElement(Etudiants O) {
+    	
         return false;
     }
 
@@ -25,7 +26,7 @@ public class TraitementEtudaint implements IDao<Etudiants> {
     public boolean suppElement(Etudiants O) {
         return false;
     }
-
+    
     @Override
     public Etudiants getElement(int id) {
         return null;
