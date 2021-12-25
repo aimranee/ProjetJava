@@ -1,4 +1,4 @@
-package Interface.Etudiant;
+package InterfaceGr.Etudiant;
 
 import javax.swing.JFrame;
 

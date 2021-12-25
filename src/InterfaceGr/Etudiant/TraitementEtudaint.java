@@ -1,9 +1,8 @@
-package Interface.Etudiant;
+package InterfaceGr.Etudiant;
 
 import Administrative.Etudiant.Etudiants;
 import Dao.IDao;
 import ConnectionOracl.Connect;
-import ConnectionOracl.ConnectionOracl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
