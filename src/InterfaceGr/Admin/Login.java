@@ -21,7 +21,7 @@ public class Login extends JFrame implements ActionListener {
     JCheckBox showPassword = new JCheckBox("Show Password");
 
 
-    Login() {
+    public Login() {
         setLayoutManager();
         setLocationAndSize();
         addComponentsToContainer();
