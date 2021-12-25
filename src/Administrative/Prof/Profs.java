@@ -4,19 +4,30 @@ public class Profs {
     private int id;
     private String nom;
     private String prenom;
+    private String username;
 
-    public Profs(int id, String nom, String prenom) {
+    public Profs(int id, String nom, String prenom,String username) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
+        this.username = username;
     }
 
-    public Profs(String nom, String prenom) {
+    public Profs(String nom, String prenom,String username) {
         this.nom = nom;
         this.prenom = prenom;
+        this.username = username;
     }
 
-    public int getId() {
+    public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public int getId() {
         return id;
     }
 
