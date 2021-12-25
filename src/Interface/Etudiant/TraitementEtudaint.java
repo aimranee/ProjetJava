@@ -1,7 +1,8 @@
-package InterfaceGraphique.Etudiant;
+package Interface.Etudiant;
 
 import Administrative.Etudiant.Etudiants;
 import Dao.IDao;
+import ConnectionOracl.Connect;
 import ConnectionOracl.ConnectionOracl;
 
 import java.sql.Connection;
@@ -10,11 +11,24 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class TraitementEtudaint implements IDao<Etudiants> {
-
+	Connection con ;
+	
     @Override
     public boolean createElement(Etudiants O) {
-    	
-        return false;
+    	con = Connect.getCon();
+		String req = "insert into clients(version,titre,nom,prenom) values(?,?,?,?)";
+		try {
+			PreparedStatement ps = con.prepareStatement(req);
+//			ps.setInt(1,O.getVersion());
+//			ps.setString(2,O.getTitre());
+			ps.setString(3,O.getNom());
+			ps.setString(4,O.getPrenom());
+			ps.executeUpdate();
+			System.out.println("Bien Ajouter");
+		    }catch(SQLException e) {
+		    	e.printStackTrace();
+		    }
+        return true;
     }
 
     @Override
