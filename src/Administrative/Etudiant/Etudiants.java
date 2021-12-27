@@ -4,28 +4,21 @@ public class Etudiants {
     private int id;
     private String nom;
     private String prenom;
-    private int halakaQuranId;
-    private int halakaMoutonId;
+    private int halakaId;
+//    private int halakaMoutonId;
 
-    public Etudiants(int id, String nom, String prenom, int halakaQuranId, int halakaMoutonId) {
+    public Etudiants(int id, String nom, String prenom, int halakaId) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
-        this.halakaQuranId = halakaQuranId;
-        this.halakaMoutonId = halakaMoutonId;
+        this.halakaId = halakaId;
+//        this.halakaMoutonId = halakaMoutonId;
     }
 
-    public Etudiants(String nom, String prenom, int halakaQuranId) {
+    public Etudiants(String nom, String prenom, int halakaId) {
         this.nom = nom;
         this.prenom = prenom;
-        this.halakaQuranId = halakaQuranId;
-    }
-
-    public Etudiants(String nom, String prenom, int halakaQuranId, int halakaMoutonId) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.halakaQuranId = halakaQuranId;
-        this.halakaMoutonId = halakaMoutonId;
+        this.halakaId = halakaId;
     }
 
     public int getId() {
@@ -52,19 +45,18 @@ public class Etudiants {
         this.prenom = prenom;
     }
 
-    public int getHalakaQuranId() {
-        return halakaQuranId;
+    public int getHalakaId() {
+        return halakaId;
     }
 
-    public void setHalakaQuranId(int halakaQuranId) {
-        this.halakaQuranId = halakaQuranId;
+    public void setHalakaId(int halakaId) {
+        this.halakaId = halakaId;
     }
 
-    public int getHalakaMoutonId() {
-        return halakaMoutonId;
-    }
+	@Override
+	public String toString() {
+		return "Etudiants [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", halakaId=" + halakaId + "]";
+	}
 
-    public void setHalakaMoutonId(int halakaMoutonId) {
-        this.halakaMoutonId = halakaMoutonId;
-    }
+
 }
