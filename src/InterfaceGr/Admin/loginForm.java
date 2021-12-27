@@ -285,9 +285,9 @@ public class loginForm extends javax.swing.JFrame {
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO add your handling code here:
-        signupForm s = new signupForm();
-        s.setVisible(true);
-        this.dispose();
+//        signupForm s = new signupForm();
+//        s.setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked

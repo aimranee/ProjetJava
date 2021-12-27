@@ -1,7 +1,12 @@
 package InterfaceGr.Admin;
-
 import javax.swing.*;
 
-public class GraphiqueAdmin extends JFrame {
+
 	
-}
+	public class GraphiqueAdmin extends JFrame {
+
+	}
+
+
+	
+
