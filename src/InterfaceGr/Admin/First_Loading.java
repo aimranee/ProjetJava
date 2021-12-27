@@ -5,14 +5,14 @@ import java.awt.*;
 
 public class First_Loading extends JFrame{
     JFrame frame;
-    JLabel image=new JLabel(new ImageIcon("/icons/logoD.jpeg"));
-    JLabel text=new JLabel("Welcome admin");
+    JLabel image=new JLabel(new ImageIcon("/icons/logoD2.jpg"));
+    JLabel text=new JLabel("welcome to your application ");
     JProgressBar progressBar=new JProgressBar();
     JLabel message=new JLabel();
     First_Loading()
     {
         createGUI();
-        addImage();
+//        addImage();
         addText();
         addProgressBar();
         addMessage();
@@ -28,16 +28,15 @@ public class First_Loading extends JFrame{
         frame.setVisible(true);
 
     }
-    public void addImage(){
-        image.setSize(600,200);
-        frame.add(image);
-    }
+   
     public void addText()
     {
         text.setFont(new Font("arial",Font.BOLD,30));
-        text.setBounds(170,220,600,40);
+        text.setBounds(110,120,600,40);
         text.setForeground(Color.BLUE);
         frame.add(text);
+//        image.setSize(600,200);
+//        frame.add(image);
     }
     public void addMessage()
     {
@@ -51,7 +50,7 @@ public class First_Loading extends JFrame{
         progressBar.setBorderPainted(true);
         progressBar.setStringPainted(true);
         progressBar.setBackground(Color.WHITE);
-        progressBar.setForeground(Color.BLACK);
+        progressBar.setForeground(Color.BLUE);
         progressBar.setValue(0);
         frame.add(progressBar);
     }
