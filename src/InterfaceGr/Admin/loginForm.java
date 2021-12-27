@@ -8,6 +8,7 @@ package InterfaceGr.Admin;
 import javax.swing.JOptionPane;
 
 import ConnectionOracl.Connect;
+import InterfaceGr.PageMenu;
 
 import java.sql.*;
 import java.util.logging.Level;
@@ -16,7 +17,7 @@ import java.util.logging.Logger;
 
 public class loginForm extends javax.swing.JFrame {
 
-    Connection conn = null;
+    Connection con = Connect.getCon();
     PreparedStatement ps = null;
     ResultSet rs = null;
     
@@ -44,7 +45,9 @@ public class loginForm extends javax.swing.JFrame {
         txtPass = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        txtDes = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
@@ -58,8 +61,8 @@ public class loginForm extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Login admin !");
-
+        jLabel1.setText("Login Form !");
+        
         lblClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Cancel_Icon.png"))); // NOI18N
         lblClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblClose.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -89,6 +92,18 @@ public class loginForm extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(19, 19, 19))
         );
+        
+        jLabel9.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel9.setText("Designation :");
+        
+        txtDes.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        txtDes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Prof" }));
+        txtDes.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 1, 2, 1, new java.awt.Color(153, 153, 153)));
+        txtDes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtDes.setMaximumSize(new java.awt.Dimension(90, 75));
+        txtDes.setPreferredSize(new java.awt.Dimension(190, 35));
+        
 
         jLabel3.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(153, 153, 153));
@@ -107,7 +122,7 @@ public class loginForm extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(153, 153, 153));
         jLabel5.setText("Forgot");
-
+        
         jLabel6.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 102, 0));
         jLabel6.setText("Password ?");
@@ -136,7 +151,7 @@ public class loginForm extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 102, 0));
-        jLabel7.setText("Sign Up Now");
+        jLabel7.setText("Aide");
         jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -144,9 +159,9 @@ public class loginForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel8.setText("Don't have an account ?");
+//        jLabel8.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+//        jLabel8.setForeground(new java.awt.Color(153, 153, 153));
+//        jLabel8.setText("Don't have an account ?");
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -163,8 +178,10 @@ public class loginForm extends javax.swing.JFrame {
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel6))
+                            .addComponent(jLabel9)
                             .addComponent(txtPass)
                             .addComponent(jLabel4)
+                            .addComponent(txtDes)
                             .addComponent(txtUname)
                             .addComponent(jLabel3)))
                     .addGroup(mainPanelLayout.createSequentialGroup()
@@ -173,6 +190,7 @@ public class loginForm extends javax.swing.JFrame {
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGap(133, 133, 133)
                         .addComponent(jLabel8)))
+//                .addComponent(txtDes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
@@ -180,6 +198,13 @@ public class loginForm extends javax.swing.JFrame {
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(headerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtDes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                
+                
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtUname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -191,7 +216,7 @@ public class loginForm extends javax.swing.JFrame {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+               
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
                 .addComponent(jLabel8)
@@ -215,8 +240,8 @@ public class loginForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+
         String uname = txtUname.getText();
         String pass = String.valueOf(txtPass.getPassword());
         if (uname.equalsIgnoreCase("")) {
@@ -225,15 +250,25 @@ public class loginForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please enter Password");
         } else {
             try {
-                String sql = "SELECT * FROM `user` WHERE `uname` = ? AND `pass` = ?";
-                ps = conn.prepareStatement(sql);
+                String sql = "SELECT * FROM admin WHERE UserNamer = ? AND PassWord = ?";
+                ps = con.prepareStatement(sql);
                 ps.setString(1, uname);
                 ps.setString(2, pass);
                 rs = ps.executeQuery();
-                if (rs.next()) {
-                    String name = rs.getString(3);
-                    String des = rs.getString(5);
-                    JOptionPane.showMessageDialog(null, "Login Successful");
+                if (rs.next()){
+                    String name = rs.getString("UserNamer");
+                    String pss = rs.getString("PassWord");
+                	String dess = (String)txtDes.getSelectedItem().toString();
+                	if(dess == "Admin") {
+                		JOptionPane.showMessageDialog(null, "Login admin Successful ");
+                		PageMenu pm = new PageMenu();
+                		pm.setVisible(true);
+                		this.dispose();
+                	}else {
+                		JOptionPane.showMessageDialog(null, "Login prof Successful");
+                		this.dispose();
+
+                	}
 //                    mainForm m = new mainForm(name,des);
 //                    m.setVisible(true);
 //                    this.dispose();
@@ -311,7 +346,9 @@ public class loginForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JComboBox<String> txtDes;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblClose;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPasswordField txtPass;
