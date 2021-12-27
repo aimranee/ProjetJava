@@ -2,21 +2,18 @@ package Educative.Matiers;
 
 class Halaka {
     private int id;
-    private String dateHalaka;
     private String description;
-    private int etudiantId;
+    private int profId;
 
-    public Halaka(String dateHalaka, String description, int etudiantId) {
-        this.dateHalaka = dateHalaka;
+    public Halaka( String description, int profId) {
         this.description = description;
-        this.etudiantId = etudiantId;
+        this.profId = profId;
     }
 
-    public Halaka(int id, String dateHalaka, String description, int etudiantId) {
+    public Halaka(int id,  String description, int etudiantId) {
         this.id = id;
-        this.dateHalaka = dateHalaka;
         this.description = description;
-        this.etudiantId = etudiantId;
+        this.profId = etudiantId;
     }
 
     public int getId() {
@@ -27,13 +24,7 @@ class Halaka {
         this.id = id;
     }
 
-    public String getDateHalaka() {
-        return dateHalaka;
-    }
-
-    public void setDateHalaka(String dateHalaka) {
-        this.dateHalaka = dateHalaka;
-    }
+   
 
     public String getDescription() {
         return description;
@@ -43,11 +34,11 @@ class Halaka {
         this.description = description;
     }
 
-    public int getEtudiantId() {
-        return etudiantId;
+    public int getProfId() {
+        return profId;
     }
 
-    public void setEtudiantId(int etudiantId) {
-        this.etudiantId = etudiantId;
+    public void setProfId(int etudiantId) {
+        this.profId = etudiantId;
     }
 }

@@ -16,12 +16,11 @@ public class TraitementEtudaint implements IDao<Etudiants> {
     @Override
     public boolean createElement(Etudiants O) {
     	con = Connect.getCon();
-		String req = "insert into etudiant(Nom,Prenom,HalakaId) values(?,?,?)";
+		String req = "insert into etudiant(Nom,Prenom) values(?,?)";
 		try {
 			PreparedStatement ps = con.prepareStatement(req);
 			ps.setString(1,O.getNom());
 			ps.setString(2,O.getPrenom());
-			ps.setInt(3,O.getHalakaId());
 			ps.executeUpdate();
 			System.out.println("Bien Ajouter");
 		    }catch(SQLException e) {
@@ -34,14 +33,12 @@ public class TraitementEtudaint implements IDao<Etudiants> {
     public boolean updateElement(Etudiants O) {
     	
     	 con = Connect.getCon();
- 		String req = "update etudiant set Nom=?,Prenom=?,HalakaId=? where id=? and Nom=?";
+ 		String req = "update etudiant set Nom=?,Prenom=? where id=?";
  		try {
  			PreparedStatement ps = con.prepareStatement(req);
  			ps.setString(1,O.getNom());
  			ps.setString(2,O.getPrenom());
- 			ps.setInt(3,O.getHalakaId());
- 			ps.setInt(4,O.getId());
- 			ps.setString(5,O.getNom());
+ 			ps.setInt(3,O.getId());
  			ps.executeUpdate();			
  			System.out.println("Bien Modifier");
  		    }catch(SQLException e) {
@@ -77,7 +74,7 @@ public class TraitementEtudaint implements IDao<Etudiants> {
 			ps.setInt(1,id);
 			ResultSet res = ps.executeQuery();
 			if(res.next()) {
-				 clt = new Etudiants(id,res.getString("Nom"),res.getString("Prenom"),res.getInt("HalakaId"));
+				 clt = new Etudiants(id,res.getString("Nom"),res.getString("Prenom"));
 			}
 		}catch(SQLException e) {
 	    	e.printStackTrace();
@@ -94,7 +91,7 @@ public class TraitementEtudaint implements IDao<Etudiants> {
 			PreparedStatement pst = con.prepareStatement(req);
 			ResultSet res = pst.executeQuery();
 			while(res.next()) {
-				Etudiants p = new Etudiants(res.getInt("id"),res.getString("Nom"),res.getString("Prenom"),res.getInt("HalakaId"));
+				Etudiants p = new Etudiants(res.getInt("id"),res.getString("Nom"),res.getString("Prenom"));
 				lp.add(p);
 			}
 		}catch(SQLException e) {
@@ -102,9 +99,11 @@ public class TraitementEtudaint implements IDao<Etudiants> {
 	    }
 		return lp;
     }
-    public static void main(String [] args) {
-    	TraitementEtudaint fen = new TraitementEtudaint();
-    	Etudiants et = new Etudiants("ghann","salah",1);
-    	fen.createElement(et);
-    }
+//    public static void main(String [] args) {
+//    	TraitementEtudaint fen = new TraitementEtudaint();
+//    	Etudiants et = new Etudiants(1,"hamza","toto");
+//    	List<Etudiants> lp = new ArrayList<Etudiants>();
+//    	lp= fen.getAllElements();
+//    	System.out.println(lp);
+//    }
 }

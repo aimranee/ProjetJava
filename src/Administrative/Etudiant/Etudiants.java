@@ -4,21 +4,16 @@ public class Etudiants {
     private int id;
     private String nom;
     private String prenom;
-    private int halakaId;
-//    private int halakaMoutonId;
 
-    public Etudiants(int id, String nom, String prenom, int halakaId) {
+    public Etudiants(int id, String nom, String prenom) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
-        this.halakaId = halakaId;
-//        this.halakaMoutonId = halakaMoutonId;
     }
 
-    public Etudiants(String nom, String prenom, int halakaId) {
+    public Etudiants(String nom, String prenom) {
         this.nom = nom;
         this.prenom = prenom;
-        this.halakaId = halakaId;
     }
 
     public int getId() {
@@ -45,17 +40,9 @@ public class Etudiants {
         this.prenom = prenom;
     }
 
-    public int getHalakaId() {
-        return halakaId;
-    }
-
-    public void setHalakaId(int halakaId) {
-        this.halakaId = halakaId;
-    }
-
 	@Override
 	public String toString() {
-		return "Etudiants [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", halakaId=" + halakaId + "]";
+		return "Etudiants [id=" + id + ", nom=" + nom + ", prenom=" + prenom + "]";
 	}
 
 

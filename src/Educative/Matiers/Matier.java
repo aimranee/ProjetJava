@@ -4,28 +4,28 @@ public class Matier {
     private int id;
     private String titre;
     private int nomMatier;
-    private int profId;
+//    private int profId;
 
-    public Matier(int id, String titre, int nomMatier, int profId) {
+    public Matier(int id, String titre, int nomMatier) {
         this.id = id;
         this.titre = titre;
         this.nomMatier = nomMatier;
-        this.profId = profId;
+//        this.profId = profId;
     }
 
-    public Matier(String titre, int nomMatier, int profId) {
+    public Matier(String titre, int nomMatier) {
         this.titre = titre;
         this.nomMatier = nomMatier;
-        this.profId = profId;
+//        this.profId = profId;
     }
 
-    public int getProfId() {
-        return profId;
-    }
+//    public int getProfId() {
+//        return profId;
+//    }
 
-    public void setProfId(int profId) {
-        this.profId = profId;
-    }
+//    public void setProfId(int profId) {
+//        this.profId = profId;
+//    }
 
     public int getId() {
         return id;
