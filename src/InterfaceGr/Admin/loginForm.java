@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import ConnectionOracl.Connect;
 import InterfaceGr.PageMenu;
+import InterfaceGr.Prof.GraphiquesProf;
 
 import java.sql.*;
 import java.util.logging.Level;
@@ -261,11 +262,13 @@ public class loginForm extends javax.swing.JFrame {
                 	String dess = (String)txtDes.getSelectedItem().toString();
                 	if(dess == "Admin") {
                 		JOptionPane.showMessageDialog(null, "Login admin Successful ");
-                		PageMenu pm = new PageMenu();
+                		GraphiqueAdmin pm = new GraphiqueAdmin();
                 		pm.setVisible(true);
                 		this.dispose();
                 	}else {
                 		JOptionPane.showMessageDialog(null, "Login prof Successful");
+                		GraphiquesProf pm = new GraphiquesProf();
+                		pm.setVisible(true);
                 		this.dispose();
 
                 	}
