@@ -16,11 +16,14 @@ public class TraitementEtudaint implements IDao<Etudiants> {
     @Override
     public boolean createElement(Etudiants O) {
     	con = Connect.getCon();
-		String req = "insert into etudiant(Nom,Prenom) values(?,?)";
+		String req = "insert into etudiant(Nom,Prenom,datNaissance,sexe,filiere) values(?,?,?,?,?)";
 		try {
 			PreparedStatement ps = con.prepareStatement(req);
 			ps.setString(1,O.getNom());
 			ps.setString(2,O.getPrenom());
+			ps.setString(3,O.getDatNaissance());
+			ps.setString(4,O.getSexe());
+			ps.setString(5,O.getFiliere());
 			ps.executeUpdate();
 			System.out.println("Bien Ajouter");
 		    }catch(SQLException e) {
@@ -33,12 +36,15 @@ public class TraitementEtudaint implements IDao<Etudiants> {
     public boolean updateElement(Etudiants O) {
     	
     	 con = Connect.getCon();
- 		String req = "update etudiant set Nom=?,Prenom=? where id=?";
+ 		String req = "update etudiant set Nom=?,Prenom=? ,datNaissance=? ,sexe=? ,filiere=? where id=?";
  		try {
  			PreparedStatement ps = con.prepareStatement(req);
  			ps.setString(1,O.getNom());
  			ps.setString(2,O.getPrenom());
- 			ps.setInt(3,O.getId());
+ 			ps.setString(3,O.getDatNaissance());
+ 			ps.setString(4,O.getSexe());
+ 			ps.setString(5,O.getFiliere());
+ 			ps.setInt(6,O.getId());
  			ps.executeUpdate();			
  			System.out.println("Bien Modifier");
  		    }catch(SQLException e) {
@@ -74,7 +80,7 @@ public class TraitementEtudaint implements IDao<Etudiants> {
 			ps.setInt(1,id);
 			ResultSet res = ps.executeQuery();
 			if(res.next()) {
-				 clt = new Etudiants(id,res.getString("Nom"),res.getString("Prenom"));
+				 clt = new Etudiants(id,res.getString("Nom"),res.getString("Prenom"),res.getString("datNaissance"),res.getString("sexe"),res.getString("filiere"));
 			}
 		}catch(SQLException e) {
 	    	e.printStackTrace();
@@ -91,7 +97,7 @@ public class TraitementEtudaint implements IDao<Etudiants> {
 			PreparedStatement pst = con.prepareStatement(req);
 			ResultSet res = pst.executeQuery();
 			while(res.next()) {
-				Etudiants p = new Etudiants(res.getInt("id"),res.getString("Nom"),res.getString("Prenom"));
+				Etudiants p = new Etudiants(res.getInt("id"),res.getString("Nom"),res.getString("Prenom"),res.getString("datNaissance"),res.getString("sexe"),res.getString("filiere"));
 				lp.add(p);
 			}
 		}catch(SQLException e) {
