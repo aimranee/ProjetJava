@@ -1,4 +1,4 @@
-package Educative.Programme;
+package Educative.Programmes;
 
 public class Programmes {
     private int id;
