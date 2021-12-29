@@ -4,11 +4,11 @@ public class PresenceEtudiant {
     private int id;
     private String dateSeance;
     private String description;
-    private int note;
-    private int etudiant_id;
-    private int halaka_id;
+    private String note;
+    private String etudiant_id;
+    private String halaka_id;
 
-    public PresenceEtudiant(String dateSeance, String description, int note, int etudiant_id, int halaka_id) {
+    public PresenceEtudiant(String dateSeance, String description, String note, String etudiant_id, String halaka_id) {
         this.dateSeance = dateSeance;
         this.description = description;
         this.note = note;
@@ -16,7 +16,7 @@ public class PresenceEtudiant {
         this.halaka_id = halaka_id;
     }
 
-    public PresenceEtudiant(int id, String dateSeance, String description, int note, int etudiant_id, int halaka_id) {
+    public PresenceEtudiant(int id, String dateSeance, String description, String note, String etudiant_id, String halaka_id) {
         this.id = id;
         this.dateSeance = dateSeance;
         this.description = description;
@@ -49,23 +49,23 @@ public class PresenceEtudiant {
         this.description = description;
     }
 
-    public int getNote() { return note; }
+    public String getNote() { return note; }
 
-    public void setNote(int note) { this.note = note; }
+    public void setNote(String note) { this.note = note; }
 
-    public int getEtudiant_id() {
+    public String getEtudiant_id() {
         return etudiant_id;
     }
 
-    public void setEtudiant_id(int etudiant_id) {
+    public void setEtudiant_id(String etudiant_id) {
         this.etudiant_id = etudiant_id;
     }
 
-    public int getHalaka_id() {
+    public String getHalaka_id() {
         return halaka_id;
     }
 
-    public void setHalaka_id(int halaka_id) {
+    public void setHalaka_id(String halaka_id) {
         this.halaka_id = halaka_id;
     }
 }

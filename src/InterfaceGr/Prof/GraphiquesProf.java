@@ -1,6 +1,7 @@
 package InterfaceGr.Prof;
 
 import ConnectionOracl.Connect;
+import Educative.Presences.PresenceEtudiant;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -14,6 +15,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class GraphiquesProf extends JFrame {
@@ -69,34 +73,41 @@ public class GraphiquesProf extends JFrame {
         labelTitre2.setFont(new Font("Arial",Font.BOLD,20));
         panel.add(labelTitre2);
 
+        JLabel labelId = new JLabel("Etudiant ID ");
+        labelId.setBounds(70,240,170,25);
+        labelId.setFont(new Font("Arial",Font.BOLD,16));
+        panel.add(labelId);
+            JTextField textId = new JTextField();
+            textId.setBounds(200,240,100,25);
+            panel.add(textId);
+
+        JLabel labelHalaka = new JLabel("Halaka ID ");
+        labelHalaka.setBounds(70,270,170,25);
+        labelHalaka.setFont(new Font("Arial",Font.BOLD,16));
+        panel.add(labelHalaka);
+            JTextField textHalaka = new JTextField();
+            textHalaka.setBounds(200,270,100,25);
+            panel.add(textHalaka);
+
         JLabel labelNom = new JLabel("Nom ");
-        labelNom.setBounds(70,240,170,25);
+        labelNom.setBounds(70,300,170,25);
         labelNom.setFont(new Font("Arial",Font.BOLD,16));
         panel.add(labelNom);
             JTextField textNom = new JTextField();
-            textNom.setBounds(200,240,100,25);
+            textNom.setBounds(200,300,100,25);
             panel.add(textNom);
 
-        JLabel labelPrenom = new JLabel("Prenom ");
-        labelPrenom.setBounds(70,270,170,25);
-        labelPrenom.setFont(new Font("Arial",Font.BOLD,16));
-        panel.add(labelPrenom);
-
-            JTextField textPrenom = new JTextField();
-            textPrenom.setBounds(200,270,100,25);
-            panel.add(textPrenom);
-
-        JLabel labelNote = new JLabel("Note");
-        labelNote.setBounds(70,300,170,25);
+        JLabel labelNote = new JLabel("Note ");
+        labelNote.setBounds(70,330,170,25);
         labelNote.setFont(new Font("Arial",Font.BOLD,16));
         panel.add(labelNote);
 
             JTextField textNote=new JTextField();
-            textNote.setBounds(200,300,100,25);
+            textNote.setBounds(200,330,100,25);
             panel.add(textNote);
 
         JLabel labelDescription = new JLabel("Description ");
-        labelDescription.setBounds(70,330,170,25);
+        labelDescription.setBounds(70,360,170,25);
         labelDescription.setFont(new Font("Arial",Font.BOLD,16));
         panel.add(labelDescription);
 
@@ -104,7 +115,7 @@ public class GraphiquesProf extends JFrame {
             textDescription.setFont(new Font("Arial",Font.BOLD,11));
 
             scroll1=new JScrollPane();
-            scroll1.setBounds(200,330,200,80);
+            scroll1.setBounds(200,360,200,50);
             scroll1.setViewportView(textDescription);
             panel.add(scroll1);
 
@@ -115,34 +126,30 @@ public class GraphiquesProf extends JFrame {
         });*/
 
         JButton btnEnrg = new JButton("ENREGISTRER");
-        btnEnrg.setBounds(30,130,120,25);
+        btnEnrg.setBounds(70,430,120,25);
         btnEnrg.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Date date = new Date();
-                String nom, prenom, description;
-                String note;
-                nom = textNom.getText().toLowerCase();
-                prenom = textPrenom.getText().toLowerCase();
 
+                String etudiant_ID, note, nom, description, halaka_ID;
+                etudiant_ID = textId.getText();
+                halaka_ID = textHalaka.getText();
+                nom = textNom.getText().toLowerCase();
                 description = textDescription.getText();
                 note = textNote.getText();
-                if(!nom.equals("")&&!prenom.equals("")&&!note.equals("")) {
-                    String id_etudiant = "select id from etudiant where lower(nom) = '" + nom + "' AND lower(prenom) = '" + prenom + "'";
-                    try {
-                        rs = st.executeQuery(id_etudiant);
-                        /*JTextField textId = new JTextField();
-                        textId.setText();
-                        id = rs*/
-                    } catch (SQLException ex) {
-                        JOptionPane.showMessageDialog(null, "Erreur!", null, JOptionPane.ERROR_MESSAGE);
-                    }
-                    String rq = "insert into ABSENCEETUDIANT value (RESENCE_seq.nextval,'" + description + "','" + note + "','" + dateFormat.format(date) + "','" + rs + "')'";
-                    try {
-                        rs = st.executeQuery(rq);
-                    } catch (SQLException ex) {
-                        JOptionPane.showMessageDialog(null, "Erreur!", null, JOptionPane.ERROR_MESSAGE);
-                    }
+
+                LocalDateTime localDateTime = LocalDateTime.now();
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String dateSeance = localDateTime.format(formatter);
+
+                PresenceEtudiant present = new PresenceEtudiant(dateSeance, description, note, etudiant_ID, halaka_ID);
+
+                if(!etudiant_ID.equals("")&&!nom.equals("")&&!halaka_ID.equals("")&&!note.equals("")) {
+
+                    TraitementProf trait = new TraitementProf();
+                    trait.createElement(present);
+
                 }else{
                     JOptionPane.showMessageDialog(null,"Completez le formulaire!",null,JOptionPane.ERROR_MESSAGE);
                 }
