@@ -46,7 +46,7 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 	jp.setLayout(null);
 	jp.setBackground(Color.cyan);
 	add(jp);
-	lb1=new JLabel("Interface graphique de Gestion Etudiant");
+	lb1=new JLabel("Interface Gestion Etudiant");
 	lb1.setFont(new Font("Arial",Font.BOLD,20));
 	lb1.setForeground(Color.blue);
 	lb1.setBounds(70,10,400,30);
