@@ -3,13 +3,13 @@ package Administrative.Etudiant;
 public class Resultat {
     private int id;
     private String commentaire;
-    private double noteAbsnce;
-    private double noteQuran;
-    private double noteMouton;
-    private double noteGeneral;
-    private double etudiantId;
+    private String noteAbsnce;
+    private String noteQuran;
+    private String noteMouton;
+    private String noteGeneral;
+    private String etudiantId;
 
-    public Resultat(String commentaire, double noteAbsnce, int noteQuran, int noteMouton, int noteGeneral, int etudiantId) {
+    public Resultat(String commentaire, String noteAbsnce, String noteQuran, String noteMouton, String noteGeneral, String etudiantId) {
         this.commentaire = commentaire;
         this.noteAbsnce = noteAbsnce;
         this.noteQuran = noteQuran;
@@ -18,7 +18,7 @@ public class Resultat {
         this.etudiantId = etudiantId;
     }
 
-    public Resultat(int id, String commentaire, int noteAbsnce, int noteQuran, int noteMouton, int noteGeneral, int etudiantId) {
+    public Resultat(int id, String commentaire, String noteAbsnce, String noteQuran, String noteMouton, String noteGeneral, String etudiantId) {
         this.id = id;
         this.commentaire = commentaire;
         this.noteAbsnce = noteAbsnce;
@@ -44,43 +44,43 @@ public class Resultat {
         this.commentaire = commentaire;
     }
 
-    public int getNoteAbsnce() {
+    public String getNoteAbsnce() {
         return noteAbsnce;
     }
 
-    public void setNoteAbsnce(int noteAbsnce) {
+    public void setNoteAbsnce(String noteAbsnce) {
         this.noteAbsnce = noteAbsnce;
     }
 
-    public int getNoteQuran() {
+    public String getNoteQuran() {
         return noteQuran;
     }
 
-    public void setNoteQuran(int noteQuran) {
+    public void setNoteQuran(String noteQuran) {
         this.noteQuran = noteQuran;
     }
 
-    public int getNoteMouton() {
+    public String getNoteMouton() {
         return noteMouton;
     }
 
-    public void setNoteMouton(int noteMouton) {
+    public void setNoteMouton(String noteMouton) {
         this.noteMouton = noteMouton;
     }
 
-    public int getNoteGeneral() {
+    public String getNoteGeneral() {
         return noteGeneral;
     }
 
-    public void setNoteGeneral(int noteGeneral) {
+    public void setNoteGeneral(String noteGeneral) {
         this.noteGeneral = noteGeneral;
     }
 
-    public int getEtudiantId() {
+    public String getEtudiantId() {
         return etudiantId;
     }
 
-    public void setEtudiantId(int etudiantId) {
+    public void setEtudiantId(String etudiantId) {
         this.etudiantId = etudiantId;
     }
 }

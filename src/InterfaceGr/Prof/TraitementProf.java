@@ -49,7 +49,7 @@ public class TraitementProf implements IDao<PresenceEtudiant> {
     }
 
     @Override
-    public PresenceEtudiant getElement(int id) {
+    public PresenceEtudiant getElement(String id) {
         return null;
     }
 
