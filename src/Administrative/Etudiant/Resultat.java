@@ -3,13 +3,13 @@ package Administrative.Etudiant;
 public class Resultat {
     private int id;
     private String commentaire;
-    private int noteAbsnce;
-    private int noteQuran;
-    private int noteMouton;
-    private int noteGeneral;
-    private int etudiantId;
+    private double noteAbsnce;
+    private double noteQuran;
+    private double noteMouton;
+    private double noteGeneral;
+    private double etudiantId;
 
-    public Resultat(String commentaire, int noteAbsnce, int noteQuran, int noteMouton, int noteGeneral, int etudiantId) {
+    public Resultat(String commentaire, double noteAbsnce, int noteQuran, int noteMouton, int noteGeneral, int etudiantId) {
         this.commentaire = commentaire;
         this.noteAbsnce = noteAbsnce;
         this.noteQuran = noteQuran;
