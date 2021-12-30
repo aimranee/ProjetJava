@@ -26,14 +26,15 @@ public class GraphiquesProf extends JFrame {
     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
     public GraphiquesProf(){
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         this.setTitle ("Page Prof");
-        this.setSize (1000,750);
+        this.setSize (900,750);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
 
         panel.setLayout(null);
         add(panel);
-        panel.setBackground(new Color(200,250,150));
+        panel.setBackground(Color.lightGray);
 
         JLabel labelTitre1=new JLabel("List des Etudiants");
         labelTitre1.setBounds(400,20,800,30);
@@ -63,7 +64,7 @@ public class GraphiquesProf extends JFrame {
             JOptionPane.showMessageDialog(null,"Erreur base de donnée !",null,JOptionPane.ERROR_MESSAGE);
         }
 
-        JLabel labelTitre2=new JLabel("Formulaire de presences");
+        JLabel labelTitre2=new JLabel("Formulaire de présences");
         labelTitre2.setBounds(50,200,800,30);
         labelTitre2.setFont(new Font("Arial",Font.BOLD,20));
         panel.add(labelTitre2);
