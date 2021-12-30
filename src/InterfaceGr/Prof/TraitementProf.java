@@ -22,7 +22,7 @@ public class TraitementProf implements IDao<Profs> {
     }
 
     @Override
-    public Profs getElement(int id) {
+    public Profs getElement(String id) {
         return null;
     }
 

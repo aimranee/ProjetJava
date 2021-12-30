@@ -1,14 +1,14 @@
 package Administrative.Etudiant;
 
 public class Etudiants {
-    private int id;
+    private String id;
     private String nom;
     private String prenom;
     private String datNaissance;
     private String sexe;
     private String filiere;
 
-    public Etudiants(int id, String nom, String prenom ,String datNaissance, String sexe ,String filiere) {
+    public Etudiants(String id, String nom, String prenom ,String datNaissance, String sexe ,String filiere) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -25,11 +25,11 @@ public class Etudiants {
         this.filiere = filiere;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

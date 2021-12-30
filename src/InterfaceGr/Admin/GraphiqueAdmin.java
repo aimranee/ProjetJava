@@ -38,13 +38,14 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 	
 	
 	public GraphiqueAdmin(){
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		this.setTitle("Gestion Etudiant");
 		this.setSize(1000,650);
 		this.setResizable(false);
 		this.setLocation(350,30);
 	JPanel jp=new JPanel();
 	jp.setLayout(null);
-	jp.setBackground(Color.cyan);
+	jp.setBackground(Color.lightGray);
 	add(jp);
 	lb1=new JLabel("Interface Gestion Etudiant");
 	lb1.setFont(new Font("Arial",Font.BOLD,20));
@@ -57,7 +58,7 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 	lb0.setForeground(Color.black);
 	lb0.setBounds(150,50,100,30);
 	jp.add(lb0);
-	// matricule
+	// id
 	lb2=new JLabel("Id");
 	lb2.setFont(new Font("Arial",Font.BOLD,15));
 	lb2.setForeground(Color.blue);
@@ -127,24 +128,11 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 		jcb=new JComboBox();
 		jcb.addItem("Quran");
 		jcb.addItem("Mouton");
-//		jcb.addItem("GEL");
-//		jcb.addItem("GEN");
+
 		jcb.setBounds(130,290,100,25);
 		jp.add(jcb);
 	//Niveau
-//		lb8=new JLabel("Niveau");
-//		lb8.setFont(new Font("Arial",Font.BOLD,15));
-//		lb8.setForeground(Color.blue);
-//		lb8.setBounds(65,330,100,30);
-//		jp.add(lb8);
-		
-//		jcb2=new JComboBox();
-//		jcb2.addItem("1");
-//		jcb2.addItem("2");
-//		jcb2.addItem("3");
-//		jcb2.setBounds(130,330,100,25);
-//		jp.add(jcb2);
-		//
+
 		lb9=new JLabel("Aller à:");
 		lb9.setFont(new Font("Arial",Font.BOLD,18));
 		lb9.setForeground(Color.blue);
@@ -197,28 +185,7 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 				jb7.addActionListener(this);
 				jp.add(jb7);
 		//jb note
-//			jb8=new JButton("Note");
-//			jb8.setBounds(190,490,80,30);
-//			jb8.setForeground(Color.blue);
-//			jb8.setBackground(Color.white);
-//			jb8.addActionListener(this);
-//			jp.add(jb8);
-//			
-//			//jb requetes
-//			jb9=new JButton("Requetes");
-//			jb9.setBounds(100,540,110,30);
-//			jb9.setForeground(Color.blue);
-//			jb9.setBackground(Color.white);
-//			jb9.addActionListener(this);
-//			jp.add(jb9);
-//			//
-//			//jb10
-//			jb10=new JButton("Password");
-//			jb10.setBounds(220,540,110,30);
-//			jb10.setForeground(Color.blue);
-//			jb10.setBackground(Color.white);
-//			jb10.addActionListener(this);
-//			jp.add(jb10);
+
 		
 		
 		DefaultTableModel df=new DefaultTableModel();
@@ -229,7 +196,6 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 		df.addColumn("DatNaissance");
 		df.addColumn("Sexe");
 		df.addColumn("Filiere");
-//		df.addColumn("Niveau");
 		tb.setModel(df);
 		jp.add(scrl);
 		
@@ -269,9 +235,8 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 		// TODO Auto-generated method stub
 		//ajout
 		if(e.getSource()==jb1){
-			int a;
-			String b,c,d,f,g,h;
-		a=Integer.parseInt(jtf2.getText());b=jtf3.getText();c=jtf4.getText();d=jtf5.getText();
+			String a, b,c,d,f,g,h;
+		a=jtf2.getText();b=jtf3.getText();c=jtf4.getText();d=jtf5.getText();
 		if(rb1.isSelected()) f=rb1.getText(); else f=rb2.getText();
 		g=jcb.getSelectedItem().toString();
 //		h=jcb2.getSelectedItem().toString();
@@ -295,14 +260,15 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 		}//
 		//suppression
 				if(e.getSource()==jb2){
-					int a;
-					a=Integer.parseInt(jtf2.getText());
+					String a;
+					a=jtf2.getText();
 					TraitementEtudaint fen = new TraitementEtudaint();
 //			    	Etudiants et = new Etudiants(a,b,c,d,f,g);
 				String query="delete from etudiant where id='"+a+"'";
 				try{
 					st=con.createStatement();
 					if(JOptionPane.showConfirmDialog(this,"Voulez vous supprimer?",null,JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION){
+//						fen.suppElement(a);
 						st.executeUpdate(query);
 						JOptionPane.showMessageDialog(this,"Suppression reussie!");
 					}
@@ -317,9 +283,8 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 				}//
 				//modification
 				if(e.getSource()==jb3){
-					int a;
-					String b,c,d,f,g,h;
-				a=Integer.parseInt(jtf2.getText());b=jtf3.getText();c=jtf4.getText();d=jtf5.getText();
+					String a,b,c,d,f,g,h;
+				a= jtf2.getText();b=jtf3.getText();c=jtf4.getText();d=jtf5.getText();
 				if(rb1.isSelected()) f=rb1.getText(); else f=rb2.getText();
 				g=jcb.getSelectedItem().toString();
 					
@@ -344,8 +309,8 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 				}//
 				//recherche
 				if(e.getSource()==jb4){
-					int a;
-					a=Integer.parseInt(jtf2.getText());
+					String a;
+					a=jtf2.getText();
 				String query="select * from etudiant where id='"+a+"'";
 				try{
 					
@@ -387,9 +352,11 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 		
 		
 		if(e.getSource()==jb7){
-			this.dispose();
-//			logout logout =new logout();
-//			logout.setVisible(true);
+			if(JOptionPane.showConfirmDialog(this,"Voulez vous vraiment se connecte?",null,JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION){
+				this.dispose();
+				loginForm logout =new loginForm();
+				logout.setVisible(true);
+			}
 			
 		}
 //		if(e.getSource()==jb8){

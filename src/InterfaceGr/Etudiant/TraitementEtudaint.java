@@ -44,7 +44,7 @@ public class TraitementEtudaint implements IDao<Etudiants> {
  			ps.setString(3,O.getDatNaissance());
  			ps.setString(4,O.getSexe());
  			ps.setString(5,O.getFiliere());
- 			ps.setInt(6,O.getId());
+ 			ps.setString(6,O.getId());
  			ps.executeUpdate();			
  			System.out.println("Bien Modifier");
  		    }catch(SQLException e) {
@@ -60,7 +60,7 @@ public class TraitementEtudaint implements IDao<Etudiants> {
 		String req = "delete from etudiant where id=?";
 		try {
 			PreparedStatement ps = con.prepareStatement(req);
-			ps.setInt(1,O.getId());
+			ps.setString(1,O.getId());
 			ps.executeUpdate();
 			System.out.println("Bien supprimer");
 		    }catch(SQLException e) {
@@ -71,13 +71,13 @@ public class TraitementEtudaint implements IDao<Etudiants> {
     }
     
     @Override
-    public Etudiants getElement(int id) {
+    public Etudiants getElement(String id) {
     	Etudiants clt = null;
 		 con = Connect.getCon();
 		String req = "select * from etudiant where id = ?";
 		try {
 			PreparedStatement ps = con.prepareStatement(req);
-			ps.setInt(1,id);
+			ps.setString(1,id);
 			ResultSet res = ps.executeQuery();
 			if(res.next()) {
 				 clt = new Etudiants(id,res.getString("Nom"),res.getString("Prenom"),res.getString("datNaissance"),res.getString("sexe"),res.getString("filiere"));
@@ -97,7 +97,7 @@ public class TraitementEtudaint implements IDao<Etudiants> {
 			PreparedStatement pst = con.prepareStatement(req);
 			ResultSet res = pst.executeQuery();
 			while(res.next()) {
-				Etudiants p = new Etudiants(res.getInt("id"),res.getString("Nom"),res.getString("Prenom"),res.getString("datNaissance"),res.getString("sexe"),res.getString("filiere"));
+				Etudiants p = new Etudiants(res.getString("id"),res.getString("Nom"),res.getString("Prenom"),res.getString("datNaissance"),res.getString("sexe"),res.getString("filiere"));
 				lp.add(p);
 			}
 		}catch(SQLException e) {
