@@ -190,7 +190,7 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 		jp.add(jb5);
 		
 		//jbmatiere
-				jb7=new JButton("Matiere");
+				jb7=new JButton("Logout");
 				jb7.setBounds(100,490,80,30);
 				jb7.setForeground(Color.blue);
 				jb7.setBackground(Color.white);
