@@ -96,7 +96,7 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 		lb5.setBounds(20,210,100,30);
 		jp.add(lb5);
 				
-		jtf5=new JTextField("   JJ-MM-AAAA");
+		jtf5=new JTextField("JJ-MM-AAAA");
 		jtf5.setBounds(130,210,150,30);
 		jp.add(jtf5);
 	//sexe
@@ -125,10 +125,10 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 		jp.add(lb7);
 		
 		jcb=new JComboBox();
-		jcb.addItem("GI");
-		jcb.addItem("GM");
-		jcb.addItem("GEL");
-		jcb.addItem("GEN");
+		jcb.addItem("Quran");
+		jcb.addItem("Mouton");
+//		jcb.addItem("GEL");
+//		jcb.addItem("GEN");
 		jcb.setBounds(130,290,100,25);
 		jp.add(jcb);
 	//Niveau
