@@ -1,23 +1,34 @@
 package Educative.Absences;
 
 public class AbsenceEtudiant extends Absences{
-    private int etudiantId;
+    private String etudiantId;
+    private String halakaId;
 
-    public AbsenceEtudiant(String dateAbsence, String description, int etudiantId) {
-        super(dateAbsence, description);
-        this.etudiantId = etudiantId;
-    }
-
-    public AbsenceEtudiant(int id, String dateAbsence, String description, int etudiantId) {
-        super(id, dateAbsence, description);
-        this.etudiantId = etudiantId;
-    }
-
-    public int getEtudiantId() {
+    public String getEtudiantId() {
         return etudiantId;
     }
 
-    public void setEtudiantId(int etudiantId) {
+    public void setEtudiantId(String etudiantId) {
         this.etudiantId = etudiantId;
+    }
+
+    public String getHalakaId() {
+        return halakaId;
+    }
+
+    public void setHalakaId(String halakaId) {
+        this.halakaId = halakaId;
+    }
+
+    public AbsenceEtudiant(String dateAbsence, String description, String etudiantId, String halakaId) {
+        super(dateAbsence, description);
+        this.etudiantId = etudiantId;
+        this.halakaId = halakaId;
+    }
+
+    public AbsenceEtudiant(int id, String dateAbsence, String description, String etudiantId, String halakaId) {
+        super(id, dateAbsence, description);
+        this.etudiantId = etudiantId;
+        this.halakaId = halakaId;
     }
 }
