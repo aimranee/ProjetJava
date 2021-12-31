@@ -12,7 +12,6 @@ public class First_Loading extends JFrame{
     First_Loading()
     {
         createGUI();
-//        addImage();
         addText();
         addProgressBar();
         addMessage();

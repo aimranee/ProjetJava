@@ -40,7 +40,7 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 		this.setTitle("Gestion Etudiant");
 		this.setSize(1000,650);
 		this.setResizable(false);
-		this.setLocation(350,30);
+		this.setLocation(220,70);
 	JPanel jp=new JPanel();
 	jp.setLayout(null);
 	jp.setBackground(Color.lightGray);
@@ -183,8 +183,8 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 				jb7.addActionListener(this);
 				jp.add(jb7);
 		//jb note
-				jb8=new JButton("Logout");
-				jb8.setBounds(100,490,80,30);
+				jb8=new JButton("Gestion_Resultat");
+				jb8.setBounds(220,490,140,30);
 				jb8.setForeground(Color.blue);
 				jb8.setBackground(Color.white);
 				jb8.addActionListener(this);
@@ -310,7 +310,7 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 					
 				}
 					
-				}//
+				}
 				//recherche
 				if(e.getSource()==jb4){
 					String a;
@@ -344,7 +344,7 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 					
 				}
 					
-				}//
+				}
 
 				
 		if(e.getSource()==jb5){
@@ -369,20 +369,7 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 			nt.setVisible(true);
 			
 		}
-//		if(e.getSource()==jb9){
-//			this.dispose();
-//			 Requetes_liste ls=new  Requetes_liste();
-//			ls.setVisible(true);
-//			
-//		}
-//		
-//		//
-//		if(e.getSource()==jb10){
-//		this.dispose();
-//		 CRUD_mdp ls=new  CRUD_mdp();
-//		ls.setVisible(true);
-//		
-//	}
+
 	}
 
 }

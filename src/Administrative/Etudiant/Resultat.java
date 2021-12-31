@@ -1,6 +1,8 @@
 package Administrative.Etudiant;
 
-public class Resultat {
+import java.io.Serializable;
+
+public class Resultat implements Serializable{
     private int id;
     private String commentaire;
     private String noteAbsnce;
