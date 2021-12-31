@@ -1,33 +1,28 @@
 package InterfaceGr.Prof;
 
-import Administrative.Prof.Profs;
 import ConnectionOracl.Connect;
 import Dao.IDao;
-import Educative.Absences.Absences;
-import Educative.Presences.PresenceEtudiant;
+import Educative.Absences.AbsenceEtudiant;
 
 import javax.swing.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
-public class TraitementProf implements IDao<PresenceEtudiant> {
+public class TraitementProf implements IDao<AbsenceEtudiant> {
     Connection con ;
 
     @Override
-    public boolean createElement(PresenceEtudiant O) {
+    public boolean createElement(AbsenceEtudiant O) {
         con = Connect.getCon();
-        String req = "insert into presence values(PRESENCE_seq.nextval,?,?,?,?,?)";
+        String req = "insert into presence values(absenceEtudiant_seq.nextval,?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(req);
-            ps.setString(1,O.getDescription());
-            ps.setString(2,O.getNote());
-            ps.setString(3,O.getDateSeance());
-            ps.setString(4,O.getEtudiant_id());
-            ps.setString(5,O.getHalaka_id());
+            ps.setString(1,O.getDateAbsence());
+            ps.setString(2,O.getDescription());
+            ps.setString(3,O.getEtudiantId());
+            ps.setString(4,O.getHalakaId());
 
             ps.executeUpdate();
             System.out.println("Bien Ajouter");
@@ -39,23 +34,37 @@ public class TraitementProf implements IDao<PresenceEtudiant> {
     }
 
     @Override
-    public boolean updateElement(PresenceEtudiant O) {
+    public boolean updateElement(AbsenceEtudiant O) {
         return false;
     }
 
     @Override
-    public boolean suppElement(PresenceEtudiant O) {
+    public boolean suppElement(AbsenceEtudiant O) {
         return false;
     }
 
     @Override
-    public PresenceEtudiant getElement(String id) {
+    public AbsenceEtudiant getElement(String id) {
         return null;
     }
 
+
     @Override
-    public List<PresenceEtudiant> getAllElements() {
-        return null;
+    public List<AbsenceEtudiant> getAllElements() {
+        List<AbsenceEtudiant> listAbsences = new ArrayList<>();
+        con = Connect.getCon();
+        String req = "SELECT * FROM Etudiant";
+        try{
+            PreparedStatement ps = con.prepareStatement(req);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                AbsenceEtudiant P = new AbsenceEtudiant (rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4));
+                listAbsences.add(P);
+            }
+        } catch(SQLException e){
+            System.out.println(e);
+        }
+        return listAbsences;
     }
 
 }

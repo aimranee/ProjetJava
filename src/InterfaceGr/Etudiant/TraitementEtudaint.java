@@ -3,6 +3,8 @@ package InterfaceGr.Etudiant;
 import Administrative.Etudiant.Etudiants;
 import Dao.IDao;
 import ConnectionOracl.Connect;
+import Educative.Presences.PresenceEtudiant;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -88,7 +90,8 @@ public class TraitementEtudaint implements IDao<Etudiants> {
 		return clt;
     }
 
-    @Override
+
+	@Override
     public List<Etudiants> getAllElements() {
     	List<Etudiants> lp = new ArrayList<Etudiants>();
 		 con = Connect.getCon();

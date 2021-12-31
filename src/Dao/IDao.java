@@ -1,5 +1,7 @@
 package Dao;
 
+import Educative.Presences.PresenceEtudiant;
+
 import java.util.List;
 
 public interface IDao <T>{
@@ -7,5 +9,8 @@ public interface IDao <T>{
     boolean updateElement (T O);
     boolean suppElement (T O);
     T getElement (String id);
+
+    //PresenceEtudiant getElement(int id);
+
     List<T> getAllElements ();
 }

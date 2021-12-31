@@ -9,6 +9,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.io.*;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,14 +28,15 @@ public class GraphiquesProf extends JFrame {
     ResultSet rs;
     JPanel panel = new JPanel();
     Connection con = Connect.getCon();
-    JTable table = new JTable();
-    JScrollPane scroll,scroll1 = new JScrollPane();
+    JTable table,table2 = new JTable();
+    JScrollPane scroll,scroll1,scroll2 = new JScrollPane();
     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
-    public GraphiquesProf(){
+    public GraphiquesProf() {
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         this.setTitle ("Page Prof");
-        this.setSize (900,750);
+        this.setSize (1000,600);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
 
@@ -47,7 +51,7 @@ public class GraphiquesProf extends JFrame {
 
         DefaultTableModel df = new DefaultTableModel();
         init();
-        panel.add(scroll);
+        panel.add(scroll1);
 
         df.addColumn("ID");
         df.addColumn("Nom");
@@ -68,10 +72,33 @@ public class GraphiquesProf extends JFrame {
             JOptionPane.showMessageDialog(null,"Erreur base de donnée !",null,JOptionPane.ERROR_MESSAGE);
         }
 
-        JLabel labelTitre2=new JLabel("Formulaire de présences");
+        JLabel labelTitre2=new JLabel("Formulaire de presences");
         labelTitre2.setBounds(50,200,800,30);
         labelTitre2.setFont(new Font("Arial",Font.BOLD,20));
         panel.add(labelTitre2);
+
+        DefaultTableModel df1 = new DefaultTableModel();
+        init1();
+        panel.add(scroll2);
+
+        df1.addColumn("ID");
+        df1.addColumn("Nom");
+        df1.addColumn("Prenom");
+        table.setModel(df1);
+        String req1="select * from etudiant";
+        try {
+            st=con.createStatement();
+            rs = st.executeQuery(req1);
+            while (rs.next()){
+                df1.addRow(new Object[]{
+                        rs.getString("ID"),
+                        rs.getString("NOM"),
+                        rs.getString("PRENOM")
+                });
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Erreur base de donnée !",null,JOptionPane.ERROR_MESSAGE);
+        }
 
         JLabel labelId = new JLabel("Etudiant ID ");
         labelId.setBounds(70,240,170,25);
@@ -97,33 +124,18 @@ public class GraphiquesProf extends JFrame {
             textNom.setBounds(200,300,100,25);
             panel.add(textNom);
 
-        JLabel labelNote = new JLabel("Note ");
-        labelNote.setBounds(70,330,170,25);
-        labelNote.setFont(new Font("Arial",Font.BOLD,16));
-        panel.add(labelNote);
-
-            JTextField textNote=new JTextField();
-            textNote.setBounds(200,330,100,25);
-            panel.add(textNote);
-
         JLabel labelDescription = new JLabel("Description ");
-        labelDescription.setBounds(70,360,170,25);
+        labelDescription.setBounds(70,330,170,25);
         labelDescription.setFont(new Font("Arial",Font.BOLD,16));
         panel.add(labelDescription);
 
             JTextArea textDescription = new JTextArea();
             textDescription.setFont(new Font("Arial",Font.BOLD,11));
 
-            scroll1=new JScrollPane();
-            scroll1.setBounds(200,360,200,50);
-            scroll1.setViewportView(textDescription);
-            panel.add(scroll1);
-
-        /*table.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                selectTable(evt);
-            }
-        });*/
+            scroll=new JScrollPane();
+            scroll.setBounds(200,330,200,100);
+            scroll.setViewportView(textDescription);
+            panel.add(scroll);
 
         JButton btnEnrg = new JButton("ENREGISTRER");
         btnEnrg.setBounds(70,430,120,25);
@@ -136,20 +148,45 @@ public class GraphiquesProf extends JFrame {
                 halaka_ID = textHalaka.getText();
                 nom = textNom.getText().toLowerCase();
                 description = textDescription.getText();
-                note = textNote.getText();
 
                 LocalDateTime localDateTime = LocalDateTime.now();
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 String dateSeance = localDateTime.format(formatter);
 
-                PresenceEtudiant present = new PresenceEtudiant(dateSeance, description, note, etudiant_ID, halaka_ID);
+                if(!etudiant_ID.equals("")&&!nom.equals("")&&!halaka_ID.equals("")) {
 
-                if(!etudiant_ID.equals("")&&!nom.equals("")&&!halaka_ID.equals("")&&!note.equals("")) {
+                    final BufferedReader in;
+                    final PrintWriter out;
+                    try {
 
-                    TraitementProf trait = new TraitementProf();
-                    trait.createElement(present);
+                        Socket profSocket = new Socket("127.0.0.1", 5000);
 
+                        //flux pour envoyer
+                        out = new PrintWriter(profSocket.getOutputStream());
+                        //flux pour recevoir
+                        in = new BufferedReader(new InputStreamReader(profSocket.getInputStream()));
+
+                        Thread envoyer = new Thread(new Runnable() {
+
+                            @Override
+                            public void run() {
+
+                                out.println(dateSeance);
+                                out.println(description);
+                                out.println(etudiant_ID);
+                                out.println(halaka_ID);
+                                out.flush();
+                                System.out.println("done");
+
+                            }
+                        });
+                        envoyer.start();
+
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(null,"ERREUR SERVER",null,JOptionPane.ERROR_MESSAGE);
+                    }
                 }else{
                     JOptionPane.showMessageDialog(null,"Completez le formulaire!",null,JOptionPane.ERROR_MESSAGE);
                 }
@@ -160,25 +197,21 @@ public class GraphiquesProf extends JFrame {
 
     private void init(){
         table=new JTable();
-        scroll=new JScrollPane();
-        scroll.setBounds(200,70,600,120);
-        scroll.setViewportView(table);
+        scroll1=new JScrollPane();
+        scroll1.setBounds(200,70,600,120);
+        scroll1.setViewportView(table);
     }
-    /*private void selectTable(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectClientMouseClicked
-        DefaultTableModel model = (DefaultTableModel)table.getModel();
-        int Myindex = table.getSelectedRow();
-        textNom.setText(model.getValueAt(Myindex, 1).toString());
-        textPrenom.setText(model.getValueAt(Myindex, 2).toString());
-    }*/
 
-    public static void main(String[] args) {
+    private void init1(){
+        table2=new JTable();
+        scroll2=new JScrollPane();
+        scroll2.setBounds(450,250,500,160);
+        scroll2.setViewportView(table2);
+
+    }
+
+    public static void main(String[] args) throws IOException {
         GraphiquesProf prof = new GraphiquesProf();
         prof.setVisible(true);
     }
-    //private javax.swing.JTextField textNom,textPrenom;
 }
-/*private void selectClientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectClientMouseClicked
-        DefaultTableModel model = (DefaultTableModel)selectClient.getModel();
-        int Myindex = selectClient.getSelectedRow();
-        numD.setText(model.getValueAt(Myindex, 0).toString());
-    }*/
