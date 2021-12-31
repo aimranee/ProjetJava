@@ -34,8 +34,7 @@ public class First_Loading extends JFrame{
         text.setBounds(110,120,600,40);
         text.setForeground(Color.BLUE);
         frame.add(text);
-//        image.setSize(600,200);
-//        frame.add(image);
+
     }
     public void addMessage()
     {
@@ -61,7 +60,7 @@ public class First_Loading extends JFrame{
             try{
                 Thread.sleep(50);
                 progressBar.setValue(i);
-                message.setText("LOADING "+Integer.toString(i)+"%");
+                message.setText("LOADING ...");
                 i++;
                 if(i==100)
                     frame.dispose();
@@ -69,16 +68,14 @@ public class First_Loading extends JFrame{
                 e.printStackTrace();
             }
 
-
-
         }
     }
     public static void main(String[] args){
     	First_Loading fen = new First_Loading();
     	fen.setVisible(true);
         loginForm login = new loginForm();
-        login.setVisible(true);
         fen.dispose();
+        login.setVisible(true);
 
     }
 }
