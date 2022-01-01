@@ -16,7 +16,7 @@ public class TraitementProf implements IDao<AbsenceEtudiant> {
     @Override
     public boolean createElement(AbsenceEtudiant O) {
         con = Connect.getCon();
-        String req = "insert into presence values(absenceEtudiant_seq.nextval,?,?,?,?,?)";
+        String req = "insert into absenceetudiant values(absenceetudiant_seq.nextval,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(req);
             ps.setString(1,O.getDateAbsence());
@@ -28,7 +28,7 @@ public class TraitementProf implements IDao<AbsenceEtudiant> {
             System.out.println("Bien Ajouter");
         }catch(SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erreur!123", null, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "ID Etudiant ou ID halaka introuvable !!", null, JOptionPane.ERROR_MESSAGE);
         }
         return true;
     }
@@ -48,23 +48,9 @@ public class TraitementProf implements IDao<AbsenceEtudiant> {
         return null;
     }
 
-
     @Override
     public List<AbsenceEtudiant> getAllElements() {
-        List<AbsenceEtudiant> listAbsences = new ArrayList<>();
-        con = Connect.getCon();
-        String req = "SELECT * FROM Etudiant";
-        try{
-            PreparedStatement ps = con.prepareStatement(req);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()){
-                AbsenceEtudiant P = new AbsenceEtudiant (rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4));
-                listAbsences.add(P);
-            }
-        } catch(SQLException e){
-            System.out.println(e);
-        }
-        return listAbsences;
+        return null;
     }
 
 }

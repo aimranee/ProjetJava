@@ -1,7 +1,9 @@
 package InterfaceGr.Prof;
 
+import Administrative.Etudiant.Etudiants;
 import ConnectionOracl.Connect;
 import Educative.Presences.PresenceEtudiant;
+import InterfaceGr.Etudiant.TraitementEtudaint;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -21,20 +23,21 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.util.*;
+import java.util.List;
 
 public class GraphiquesProf extends JFrame {
     Statement st;
     ResultSet rs;
     JPanel panel = new JPanel();
     Connection con = Connect.getCon();
-    JTable table,table2 = new JTable();
+    JTable table,table1 = new JTable();
     JScrollPane scroll,scroll1,scroll2 = new JScrollPane();
     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
     public GraphiquesProf() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setTitle ("Page Prof");
         this.setSize (1000,600);
         this.setLocationRelativeTo(null);
@@ -56,23 +59,30 @@ public class GraphiquesProf extends JFrame {
         df.addColumn("ID");
         df.addColumn("Nom");
         df.addColumn("Prenom");
+        df.addColumn("Datnaissance");
+        df.addColumn("Sexe");
+        df.addColumn("Filiere");
         table.setModel(df);
+
         String req="select * from etudiant";
         try {
             st=con.createStatement();
             rs = st.executeQuery(req);
             while (rs.next()){
                 df.addRow(new Object[]{
-                        rs.getString("ID"),
-                        rs.getString("NOM"),
-                        rs.getString("PRENOM")
+                    rs.getString("ID"),
+                    rs.getString("NOM"),
+                    rs.getString("PRENOM"),
+                    rs.getString("Datnaissance"),
+                    rs.getString("Sexe"),
+                    rs.getString("Filiere")
                 });
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,"Erreur base de donnée !",null,JOptionPane.ERROR_MESSAGE);
         }
-
-        JLabel labelTitre2=new JLabel("Formulaire de presences");
+/*
+        JLabel labelTitre2=new JLabel("Formulaire d'absences");
         labelTitre2.setBounds(50,200,800,30);
         labelTitre2.setFont(new Font("Arial",Font.BOLD,20));
         panel.add(labelTitre2);
@@ -84,44 +94,99 @@ public class GraphiquesProf extends JFrame {
         df1.addColumn("ID");
         df1.addColumn("Nom");
         df1.addColumn("Prenom");
+        df1.addColumn("Datnaissance");
+        df1.addColumn("Sexe");
+        df1.addColumn("Filiere");
         table.setModel(df1);
         String req1="select * from etudiant";
+
         try {
-            st=con.createStatement();
-            rs = st.executeQuery(req1);
-            while (rs.next()){
+            List<Etudiants> listEtudiant = new ArrayList<>();
+            TraitementEtudaint listE = new TraitementEtudaint();
+            listEtudiant = listE.getAllElements();
+            Iterator<Etudiants> it = listEtudiant.iterator();
+
+            /*while (it.hasNext()){
                 df1.addRow(new Object[]{
-                        rs.getString("ID"),
-                        rs.getString("NOM"),
-                        rs.getString("PRENOM")
+                    rs.getString("ID"),
+                    rs.getString("NOM"),
+                    rs.getString("PRENOM"),
+                    rs.getString("PRENOM"),
+                    rs.getString("PRENOM"),
+                    rs.getString("PRENOM")
                 });
             }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,"Erreur base de donnée !",null,JOptionPane.ERROR_MESSAGE);
+            String[] columns = new String[] {
+                    "ID", "Nom", "Prenom", "Datnaissance", "Sexe", "Filiere"
+            };
+            //DefaultTableModel tableModel = new DefaultTableModel(columns,0);
+            JTable table = new JTable();
+
+            String[][] data = null;
+
+        String id,nom,prenom,datNaissance,sexe;
+        Etudiants etu;
+            while (it.hasNext()){
+                etu = it.next();
+                id=etu.getId();
+                nom=etu.getNom();
+                prenom=etu.getPrenom();
+                datNaissance=etu.getDatNaissance();
+                sexe=etu.getSexe();
+                String filiere=etu.getFiliere();
+
+
+            }
+        for (int i=0, j=0;i< table.size();i+=2, j++){
+
+            data[j][0] = table.get(i);
+            data[j][1] = table.get(i+1);
         }
+        init(data,columns);
+        panel.add(scroll1);
+        String[] entetes = new String[]{"Soiree", "Date", "NB Places Dispo", "Réserver"};
+
+        String[][] donnees = new String[8][8];
+
+        DefaultTableModel model = new DefaultTableModel(donnees,entetes);
+
+        JTable tableau = new JTable(donnees, entetes);
+*/
+
+        //
+
+            //DefaultTableModel df = new DefaultTableModel();
+
+            //panel.add(scroll1);
+
+        //} catch (SQLException e) {
+          //  JOptionPane.showMessageDialog(null,"Erreur base de donnée !",null,JOptionPane.ERROR_MESSAGE);
+        //}
+
+
 
         JLabel labelId = new JLabel("Etudiant ID ");
         labelId.setBounds(70,240,170,25);
         labelId.setFont(new Font("Arial",Font.BOLD,16));
         panel.add(labelId);
             JTextField textId = new JTextField();
-            textId.setBounds(200,240,100,25);
+            textId.setBounds(200,240,140,25);
             panel.add(textId);
 
         JLabel labelHalaka = new JLabel("Halaka ID ");
-        labelHalaka.setBounds(70,270,170,25);
+        labelHalaka.setBounds( 70,300,170,25);
         labelHalaka.setFont(new Font("Arial",Font.BOLD,16));
         panel.add(labelHalaka);
             JTextField textHalaka = new JTextField();
-            textHalaka.setBounds(200,270,100,25);
+            textHalaka.setBounds(200,300,140,25);
             panel.add(textHalaka);
 
         JLabel labelNom = new JLabel("Nom ");
-        labelNom.setBounds(70,300,170,25);
+        labelNom.setBounds(70,270,170,25);
         labelNom.setFont(new Font("Arial",Font.BOLD,16));
         panel.add(labelNom);
             JTextField textNom = new JTextField();
-            textNom.setBounds(200,300,100,25);
+            textNom.setBounds(200,270,140,25);
             panel.add(textNom);
 
         JLabel labelDescription = new JLabel("Description ");
@@ -136,21 +201,36 @@ public class GraphiquesProf extends JFrame {
             scroll.setBounds(200,330,200,100);
             scroll.setViewportView(textDescription);
             panel.add(scroll);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String dateSeance = localDateTime.format(formatter);
+
+        DefaultTableModel df1 = new DefaultTableModel();
+        init1();
+        panel.add(scroll2);
+
+        df1.addColumn("Etudiant ID");
+        df1.addColumn("Nom");
+        df1.addColumn("Halaka Id");
+        df1.addColumn("Date seance");
+        df1.addColumn("Description");
+        table1.setModel(df1);
+
+
 
         JButton btnEnrg = new JButton("ENREGISTRER");
-        btnEnrg.setBounds(70,430,120,25);
+        btnEnrg.setBounds(55,470,120,25);
         btnEnrg.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                String etudiant_ID, note, nom, description, halaka_ID;
+                String etudiant_ID, nom, description, halaka_ID;
                 etudiant_ID = textId.getText();
                 halaka_ID = textHalaka.getText();
                 nom = textNom.getText().toLowerCase();
                 description = textDescription.getText();
 
                 LocalDateTime localDateTime = LocalDateTime.now();
-
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 String dateSeance = localDateTime.format(formatter);
 
@@ -182,6 +262,13 @@ public class GraphiquesProf extends JFrame {
                             }
                         });
                         envoyer.start();
+                        df1.addRow(new Object[]{
+                                etudiant_ID,
+                                nom,
+                                halaka_ID,
+                                dateSeance,
+                                description
+                        });
 
                     } catch (IOException ex) {
                         ex.printStackTrace();
@@ -193,21 +280,36 @@ public class GraphiquesProf extends JFrame {
             }
         });
         panel.add(btnEnrg);
+
+        //bouton pour actualiser la fenetre
+        JButton btnActu=new JButton("ACTUALISER");
+        btnActu.setBounds(250,470,120,25);
+        btnActu.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ev){
+                dispose();
+                GraphiquesProf tb=new GraphiquesProf();
+                tb.setVisible(true);
+
+            }
+        });
+        panel.add(btnActu);
     }
 
-    private void init(){
+    private void init(/*Object[] [] data, String [] columns*/){
         table=new JTable();
+        //JTable table = new JTable( data, columns);
         scroll1=new JScrollPane();
         scroll1.setBounds(200,70,600,120);
         scroll1.setViewportView(table);
+        //DefaultTableModel model = new DefaultTableModel(data,columns);
+        //JTable tableau = new JTable(data, columns);
     }
 
     private void init1(){
-        table2=new JTable();
+        table1=new JTable();
         scroll2=new JScrollPane();
         scroll2.setBounds(450,250,500,160);
-        scroll2.setViewportView(table2);
-
+        scroll2.setViewportView(table1);
     }
 
     public static void main(String[] args) throws IOException {
