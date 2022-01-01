@@ -109,12 +109,4 @@ public class TraitementEtudaint implements IDao<Etudiants> {
 		return lp;
     }
 
-
-//    public static void main(String [] args) {
-//    	TraitementEtudaint fen = new TraitementEtudaint();
-//    	Etudiants et = new Etudiants(1,"hamza","toto");
-//    	List<Etudiants> lp = new ArrayList<Etudiants>();
-//    	lp= fen.getAllElements();
-//    	System.out.println(lp);
-//    }
 }
