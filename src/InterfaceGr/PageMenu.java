@@ -18,12 +18,7 @@ import InterfaceGr.Admin.GraphiqueAdmin;
 
 public class PageMenu extends JFrame  implements ActionListener{
 
-	JLabel lb0, lb1,lb2,lb3,lb4,lb5,lb6,lb7,lb8,lb9;
-	JTextField jtf2,jtf3,jtf4,jtf5;
-	JButton jb1,jb2,jb3,jb4,jb5,jb7,jb8,jb9,jb10;
-    JRadioButton rb1,rb2;
-	JTable tb;
-	JScrollPane scrl;
+	
 	
 	
 	public PageMenu(){
@@ -78,6 +73,13 @@ public class PageMenu extends JFrame  implements ActionListener{
 						JOptionPane.showMessageDialog(this,"Cette Partie est en cours de traitement");
 					}
 				}
+			
+			JLabel lb0, lb1,lb2,lb3,lb4,lb5,lb6,lb7,lb8,lb9;
+			JTextField jtf2,jtf3,jtf4,jtf5;
+			JButton jb1,jb2,jb3,jb4,jb5,jb7,jb8,jb9,jb10;
+		    JRadioButton rb1,rb2;
+			JTable tb;
+			JScrollPane scrl;
 	}
 
 

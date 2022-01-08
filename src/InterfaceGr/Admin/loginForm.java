@@ -261,18 +261,14 @@ public class loginForm extends javax.swing.JFrame {
     }
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {
-      
     }
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {
-       
     }
 
     private void lblCloseMouseClicked(java.awt.event.MouseEvent evt) {
         dispose();
     }
-
-   
     public static void main(String args[]) {
        
         try {
@@ -299,7 +295,6 @@ public class loginForm extends javax.swing.JFrame {
             }
         });
     }
-
     private javax.swing.JPanel headerPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

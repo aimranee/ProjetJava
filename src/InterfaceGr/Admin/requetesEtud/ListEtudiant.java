@@ -20,16 +20,10 @@ import ConnectionOracl.Connect;
 
 import java.sql.*;
 
-public class List_etd_fl extends JFrame implements ActionListener{
-	JLabel lab1,lab2;
-	JComboBox jcb1,jcb2;
-	JButton jb1,jb2,jb3;
-	JTable tb;
-	JScrollPane scrl;
-	Statement st;
-	ResultSet rst;
+public class ListEtudiant extends JFrame implements ActionListener{
+	
     Connection con = Connect.getCon();
-	public List_etd_fl(){
+	public ListEtudiant(){
 //        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
 			this.setTitle("liste des etudiants par matiere ");
@@ -38,11 +32,12 @@ public class List_etd_fl extends JFrame implements ActionListener{
 			this.setResizable(false);
 			JPanel pn=new JPanel();
 			pn.setLayout(null);
-			pn.setBackground(Color.cyan);
+			pn.setBackground(Color.gray);
 			add(pn);
 			//
 			lab1=new JLabel("LISTE DES ETUDIANTS PAR MATIERE");
 			lab1.setBounds(190,10,480,45);
+			lab1.setForeground(Color.black);
 			lab1.setFont(new Font("Arial",Font.BOLD,25));
 			lab1.setBorder(BorderFactory.createLineBorder(Color.black));
 			pn.add(lab1);
@@ -60,8 +55,8 @@ public class List_etd_fl extends JFrame implements ActionListener{
 		
 					jb1=new JButton("Recherche");
 					jb1.setBounds(640,80,100,30);
-					jb1.setBackground(Color.white);
-					jb1.setForeground(Color.blue);
+					jb1.setBackground(Color.DARK_GRAY);
+					jb1.setForeground(Color.orange);
 					jb1.addActionListener(this);
 					pn.add(jb1);
 				
@@ -86,23 +81,23 @@ public class List_etd_fl extends JFrame implements ActionListener{
 	}
 		public static void main(String[] args){
 				
-			List_etd_fl ls=new List_etd_fl();
+			ListEtudiant ls=new ListEtudiant();
 				ls.setVisible(true);
 			}
-		
-@Override
-public void actionPerformed(ActionEvent e) {
-	if(e.getSource()==jb1){
-		String a;
-		a=jcb1.getSelectedItem().toString();
-		DefaultTableModel df=new DefaultTableModel();
-		df.addColumn("ID");
-		df.addColumn("Nom");
-		df.addColumn("Prenom");
-		df.addColumn("DatNaissance");
-		df.addColumn("Sexe");
-		tb.setModel(df);
-		String qry="select * from etudiant where filiere='"+a+"'";
+			
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==jb1){
+			String a;
+			a=jcb1.getSelectedItem().toString();
+			DefaultTableModel df=new DefaultTableModel();
+			df.addColumn("ID");
+			df.addColumn("Nom");
+			df.addColumn("Prenom");
+			df.addColumn("DatNaissance");
+			df.addColumn("Sexe");
+			tb.setModel(df);
+			String qry="select * from etudiant where filiere='"+a+"'";
 				
 		try{
 			st=con.createStatement();
@@ -119,4 +114,11 @@ public void actionPerformed(ActionEvent e) {
 		}
 	}
 }
+			JLabel lab1,lab2;
+			JComboBox jcb1,jcb2;
+			JButton jb1,jb2,jb3;
+			JTable tb;
+			JScrollPane scrl;
+			Statement st;
+			ResultSet rst;
 }

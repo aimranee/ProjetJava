@@ -23,16 +23,7 @@ import InterfaceGr.Admin.requetesEtud.Requetes_liste;
 import java.sql.*;
 
 public class GestionResultat extends JFrame  implements ActionListener{
-    Connection con = Connect.getCon();
-	Statement st;
-	ResultSet rst;
-	JLabel lb0, lb1,lb2,lb3,lb4,lb5,lb6,lb7,lb8,lb9,lbid;
-	JTextField jtf2,jtf3,jtf4,jtf5,jtf6,jtfid;
-	JButton jb1,jb11,jb2,jb3,jb4,jb5,jb7,jb8,jb9,jb10;
-    JRadioButton rb1,rb2;
-    JComboBox jcb1,jcb2;
-	JTable tb;
-	JScrollPane scrl;
+    
 	
 	
 	public GestionResultat(){
@@ -52,7 +43,7 @@ public class GestionResultat extends JFrame  implements ActionListener{
 		jp.add(lb1);
 	
 		lb0=new JLabel("NOTE");
-		lb0.setFont(new Font("Arial",Font.BOLD,16));
+		lb0.setFont(new Font("Arial",Font.PLAIN,16));
 		lb0.setForeground(Color.black);
 		lb0.setBounds(150,50,100,30);
 		jp.add(lb0);
@@ -60,7 +51,7 @@ public class GestionResultat extends JFrame  implements ActionListener{
 	/* id */
 		
 		lbid=new JLabel("NoteID");
-		lbid.setFont(new Font("Arial",Font.BOLD,15));
+		lbid.setFont(new Font("Arial",Font.ITALIC,15));
 		lbid.setForeground(Color.blue);
 		lbid.setBounds(60,100,100,30);
 		jp.add(lbid);
@@ -73,12 +64,10 @@ public class GestionResultat extends JFrame  implements ActionListener{
 		/* Etudiant */
 		
 		lb2=new JLabel("Etudiant");
-		lb2.setFont(new Font("Arial",Font.BOLD,15));
+		lb2.setFont(new Font("Arial",Font.ITALIC,15));
 		lb2.setForeground(Color.blue);
 		lb2.setBounds(55,140,100,30);
 		jp.add(lb2);
-	
-
 		jtf2=new JTextField();
 		jtf2.setBounds(130,140,150,30);
 		jp.add(jtf2);
@@ -87,11 +76,10 @@ public class GestionResultat extends JFrame  implements ActionListener{
 	// NoteQuran
 		
 		lb3=new JLabel("NoteQuran");
-		lb3.setFont(new Font("Arial",Font.BOLD,15));
+		lb3.setFont(new Font("Arial",Font.ITALIC,15));
 		lb3.setForeground(Color.blue);
 		lb3.setBounds(45,180,100,30);
 		jp.add(lb3);
-	
 		jtf3=new JTextField("0.0");
 		jtf3.setBounds(130,180,150,30);
 		jp.add(jtf3);
@@ -99,11 +87,10 @@ public class GestionResultat extends JFrame  implements ActionListener{
 	// NoteMouton
 		
 		lb4=new JLabel("NoteMouton");
-		lb4.setFont(new Font("Arial",Font.BOLD,15));
+		lb4.setFont(new Font("Arial",Font.ITALIC,15));
 		lb4.setForeground(Color.blue);
 		lb4.setBounds(40,220,100,30);
 		jp.add(lb4);
-		
 		jtf4=new JTextField("0.0");
 		jtf4.setBounds(130,220,150,30);
 		jp.add(jtf4);
@@ -111,7 +98,7 @@ public class GestionResultat extends JFrame  implements ActionListener{
 	// NoteGeneral
 		
 		lb5=new JLabel("NoteGeneral");
-		lb5.setFont(new Font("Arial",Font.BOLD,15));
+		lb5.setFont(new Font("Arial",Font.ITALIC,15));
 		lb5.setForeground(Color.blue);
 		lb5.setBounds(37,260,100,30);
 		jp.add(lb5);
@@ -122,7 +109,7 @@ public class GestionResultat extends JFrame  implements ActionListener{
 	
 	//Commentaire
 		lb6=new JLabel("Commentaire");
-		lb6.setFont(new Font("Arial",Font.BOLD,15));
+		lb6.setFont(new Font("Arial",Font.ITALIC,15));
 		lb6.setForeground(Color.blue);
 		lb6.setBounds(35,300,100,30);
 		jp.add(lb6);
@@ -174,7 +161,7 @@ public class GestionResultat extends JFrame  implements ActionListener{
 		jb4=new JButton("Recherche");
 		jb4.setBounds(280,140,100,30);
 		jb4.setForeground(Color.white);
-		jb4.setBackground(Color.gray);
+		jb4.setBackground(Color.orange);
 		jb4.addActionListener(this);
 		jp.add(jb4);
 		
@@ -191,8 +178,8 @@ public class GestionResultat extends JFrame  implements ActionListener{
 		
 				jb7=new JButton("Gestion Etudiant");
 				jb7.setBounds(99,490,130,30);
-				jb7.setForeground(Color.blue);
-				jb7.setBackground(Color.white);
+				jb7.setForeground(Color.orange);
+				jb7.setBackground(Color.gray);
 				jb7.addActionListener(this);
 				jp.add(jb7);
 				
@@ -200,22 +187,22 @@ public class GestionResultat extends JFrame  implements ActionListener{
 				
 			jb8=new JButton("Logout");
 			jb8.setBounds(250,490,130,30);
-			jb8.setForeground(Color.blue);
-			jb8.setBackground(Color.white);
+			jb8.setForeground(Color.orange);
+			jb8.setBackground(Color.gray);
 			jb8.addActionListener(this);
 			jp.add(jb8);
 			
 			jb9=new JButton("Liste Requetes");
 			jb9.setBounds(99,530,130,30);
-			jb9.setForeground(Color.blue);
-			jb9.setBackground(Color.white);
+			jb9.setForeground(Color.orange);
+			jb9.setBackground(Color.gray);
 			jb9.addActionListener(this);
 			jp.add(jb9);
 			
 			jb10=new JButton("Donnee_Fich");
 			jb10.setBounds(250,530,130,30);
-			jb10.setForeground(Color.blue);
-			jb10.setBackground(Color.white);
+			jb10.setForeground(Color.orange);
+			jb10.setBackground(Color.gray);
 			jb10.addActionListener(this);
 			jp.add(jb10);
 			
@@ -375,7 +362,7 @@ public class GestionResultat extends JFrame  implements ActionListener{
 			//		logout 
 		
 			if(e.getSource()==jb8){
-				if(JOptionPane.showConfirmDialog(this,"Voulez vous vraiment se connecte?",null,JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION){
+				if(JOptionPane.showConfirmDialog(this,"Voulez vous vraiment se deconnecte?",null,JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION){
 					this.dispose();
 					loginForm logout =new loginForm();
 					logout.setVisible(true);
@@ -387,10 +374,18 @@ public class GestionResultat extends JFrame  implements ActionListener{
 				cr.setVisible(true);
 			}
 			if(e.getSource()==jb10){
-				this.dispose();
 				DeserialiseResul cr=new DeserialiseResul();
 				cr.setVisible(true);
 			}
 
 	}
+	Connection con = Connect.getCon();
+	Statement st;
+	ResultSet rst;
+	JLabel lb0, lb1,lb2,lb3,lb4,lb5,lb6,lb7,lb8,lb9,lbid;
+	JTextField jtf2,jtf3,jtf4,jtf5,jtf6,jtfid;
+	JButton jb1,jb11,jb2,jb3,jb4,jb5,jb7,jb8,jb9,jb10;
+    JRadioButton rb1,rb2;
+	JTable tb;
+	JScrollPane scrl;
 }

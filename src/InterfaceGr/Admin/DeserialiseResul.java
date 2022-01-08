@@ -25,37 +25,37 @@ import ConnectionOracl.Connect;
 import java.sql.*;
 
 public class DeserialiseResul extends JFrame implements ActionListener{
-	JLabel lab1,lab2;
-	JComboBox jcb1,jcb2;
+	JLabel lable1,lab2;JComboBox jcb1,jcb2;
 	JButton jb1,jb2,jb3;
-	JTable tb;
+	JTable table;
 	JScrollPane scrl;
 	Statement st;
 	ResultSet rst;
     Connection con = Connect.getCon();
 	public DeserialiseResul(){
 
-			this.setTitle("liste des etudiants par matiere ");
+			this.setTitle("Les Donnees dans le fichier");
 			this.setSize(1000,600);
 			this.setLocation(280,70);
 			this.setResizable(false);
 			JPanel pn=new JPanel();
 			pn.setLayout(null);
-			pn.setBackground(Color.cyan);
+			pn.setBackground(Color.gray);
 			add(pn);
 			//
-			lab1=new JLabel("LISTE DES ETUDIANTS PAR MATIERE");
-			lab1.setBounds(190,10,480,45);
-			lab1.setFont(new Font("Arial",Font.BOLD,25));
-			lab1.setBorder(BorderFactory.createLineBorder(Color.black));
-			pn.add(lab1);
+			lable1=new JLabel("Les Donnees inserer dans le fichier");
+			lable1.setBounds(190,10,480,45);
+			lable1.setForeground(Color.blue);
+			lable1.setFont(new Font("Arial",Font.BOLD,25));
+			lable1.setBorder(BorderFactory.createLineBorder(Color.black));
+			pn.add(lable1);
 		//label1
 			
 		
 					jb1=new JButton("Recherche");
 					jb1.setBounds(640,80,100,30);
-					jb1.setBackground(Color.white);
-					jb1.setForeground(Color.blue);
+					jb1.setBackground(Color.DARK_GRAY);
+					jb1.setForeground(Color.orange);
 					jb1.addActionListener(this);
 					pn.add(jb1);
 				
@@ -68,14 +68,14 @@ public class DeserialiseResul extends JFrame implements ActionListener{
 					df.addColumn("NoteMouton");
 					df.addColumn("NoteGeneral");
 					df.addColumn("Commentaire");
-					tb.setModel(df);
+					table.setModel(df);
 					pn.add(scrl);
 		
 	}
 	private void init(){
-		tb=new JTable();
+		table=new JTable();
 		scrl=new JScrollPane();
-		scrl.setViewportView(tb);
+		scrl.setViewportView(table);
 		scrl.setBounds(10,150,960,400);
 		
 	}
@@ -97,7 +97,7 @@ public void actionPerformed(ActionEvent e) {
 		df.addColumn("NoteMouton");
 		df.addColumn("NoteGeneral");
 		df.addColumn("Commentaire");
-		tb.setModel(df);
+		table.setModel(df);
 		
 		Resultat s = null;
 		try {
