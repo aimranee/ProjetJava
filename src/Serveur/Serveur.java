@@ -3,8 +3,8 @@ package Serveur;
 import Administrative.Etudiant.Etudiants;
 import Educative.Absences.AbsenceEtudiant;
 import Educative.Presences.PresenceEtudiant;
+import InterfaceGr.Etudiant.TraitementEtudaint;
 import InterfaceGr.Prof.TraitementProf;
-
 import javax.swing.*;
 import java.io.*;
 import java.net.ServerSocket;
@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 public class Serveur implements Serializable{
     static ServerSocket socketserver = null;
+    
     static Socket profSocket;
     static ObjectInputStream ois = null;
     static ObjectOutputStream oos = null;
@@ -43,9 +44,13 @@ public class Serveur implements Serializable{
                         AbsenceEtudiant absence = new AbsenceEtudiant(date, desc, etud, hala);
                         TraitementProf trait = new TraitementProf();
                         trait.createElement(absence);
-
+                        
+                        /* traitement admin ajouter */
+                        
+                       
                         //sortir de la boucle si le client a déconecté
                         System.out.println("Client déconecté");
+//                        System.exit(-1);
                         //fermer le flux et la session socket
                         profSocket.close();
 

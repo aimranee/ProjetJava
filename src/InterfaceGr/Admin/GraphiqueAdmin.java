@@ -3,6 +3,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,6 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import Administrative.Etudiant.Etudiants;
 import ConnectionOracl.Connect;
+import Educative.Absences.AbsenceEtudiant;
 import InterfaceGr.Etudiant.TraitementEtudaint;
 
 import java.sql.*;
@@ -246,10 +252,11 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 				if(rb1.isSelected()) f=rb1.getText(); else f=rb2.getText();
 				g=jcb.getSelectedItem().toString();
 				try{
+					
 					TraitementEtudaint fen = new TraitementEtudaint();
-			    	Etudiants et = new Etudiants(a,b,c,d,f,g);
+					 Etudiants  etudiant = new Etudiants(a,b,c,d,f,g);
 					if(JOptionPane.showConfirmDialog(this,"Voulez vous ajoutez?",null,JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION){
-						fen.createElement(et);
+						fen.createElement(etudiant);
 						JOptionPane.showMessageDialog(this,"Insertion reussie!");
 					}
 				}
