@@ -303,7 +303,10 @@ public class GestionResultat extends JFrame  implements ActionListener{
 					String ao,a,b,c,d,f;
 					a=jtf2.getText();b=jtf3.getText();c=jtf4.getText();d=jtf5.getText();f=jtf6.getText();
 					ao=jtfid.getText();
-				String query="update resultat set EtudiantId='"+a+"', NoteQuran='"+b+"', NoteMouton='"+c+"', NoteGeneral='"+d+"', Commentaire='"+f+"' where id='"+ao+"' " ;
+					
+				String query="update resultat set EtudiantId='"+a+"', NoteQuran='"+b+"', NoteMouton='"+c+"', "
+										+ "NoteGeneral='"+d+"', Commentaire='"+f+"' where id='"+ao+"' " ;
+				
 				try{
 					st=con.createStatement();
 					if(JOptionPane.showConfirmDialog(this,"Voulez vous modifier?",null,JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION){
