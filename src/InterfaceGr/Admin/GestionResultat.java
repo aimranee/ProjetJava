@@ -28,7 +28,7 @@ public class GestionResultat extends JFrame  implements ActionListener{
 	ResultSet rst;
 	JLabel lb0, lb1,lb2,lb3,lb4,lb5,lb6,lb7,lb8,lb9,lbid;
 	JTextField jtf2,jtf3,jtf4,jtf5,jtf6,jtfid;
-	JButton jb1,jb11,jb2,jb3,jb4,jb5,jb7,jb8,jb9;
+	JButton jb1,jb11,jb2,jb3,jb4,jb5,jb7,jb8,jb9,jb10;
     JRadioButton rb1,rb2;
     JComboBox jcb1,jcb2;
 	JTable tb;
@@ -205,12 +205,20 @@ public class GestionResultat extends JFrame  implements ActionListener{
 			jb8.addActionListener(this);
 			jp.add(jb8);
 			
-			jb9=new JButton("Liste des Requetes");
-			jb9.setBounds(99,530,150,30);
+			jb9=new JButton("Liste Requetes");
+			jb9.setBounds(99,530,130,30);
 			jb9.setForeground(Color.blue);
 			jb9.setBackground(Color.white);
 			jb9.addActionListener(this);
 			jp.add(jb9);
+			
+			jb10=new JButton("Donnee_Fich");
+			jb10.setBounds(250,530,130,30);
+			jb10.setForeground(Color.blue);
+			jb10.setBackground(Color.white);
+			jb10.addActionListener(this);
+			jp.add(jb10);
+			
 				
 				DefaultTableModel df=new DefaultTableModel();
 				init();
@@ -273,9 +281,10 @@ public class GestionResultat extends JFrame  implements ActionListener{
 		/* ajouter dans le fichier */
 		
 			if(e.getSource()==jb11){
-				String ao,a,b,c,d,f;
+				int ao;
+				String a,b,c,d,f;
 				a=jtf2.getText();b=jtf3.getText();c=jtf4.getText();d=jtf5.getText();f=jtf6.getText();
-				ao=jtfid.getText();
+				ao=Integer.parseInt(jtfid.getText());
 				SerialiseResul ser = new SerialiseResul();
 				Resultat pp = new Resultat(ao,a,b,c,d,f);
 			try{
@@ -377,5 +386,11 @@ public class GestionResultat extends JFrame  implements ActionListener{
 				Requetes_liste cr=new Requetes_liste();
 				cr.setVisible(true);
 			}
+			if(e.getSource()==jb10){
+				this.dispose();
+				DeserialiseResul cr=new DeserialiseResul();
+				cr.setVisible(true);
+			}
+
 	}
 }

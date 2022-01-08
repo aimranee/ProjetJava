@@ -3,34 +3,39 @@ package Administrative.Etudiant;
 import java.io.Serializable;
 
 public class Resultat implements Serializable{
-    private int id;
-    private String commentaire;
-    private String noteAbsnce;
+   
+	private int id;
+    private String etudiantId;
     private String noteQuran;
     private String noteMouton;
     private String noteGeneral;
-    private String etudiantId;
+    private String commentaire;
+//    private String noteAbsnce;
 
-    public Resultat(String commentaire, String noteAbsnce, String noteQuran, String noteMouton, String noteGeneral, String etudiantId) {
-        this.commentaire = commentaire;
-        this.noteAbsnce = noteAbsnce;
-        this.noteQuran = noteQuran;
-        this.noteMouton = noteMouton;
-        this.noteGeneral = noteGeneral;
-        this.etudiantId = etudiantId;
-    }
+   
 
-    public Resultat(int id, String commentaire, String noteAbsnce, String noteQuran, String noteMouton, String noteGeneral, String etudiantId) {
-        this.id = id;
-        this.commentaire = commentaire;
-        this.noteAbsnce = noteAbsnce;
-        this.noteQuran = noteQuran;
-        this.noteMouton = noteMouton;
-        this.noteGeneral = noteGeneral;
-        this.etudiantId = etudiantId;
-    }
+    public Resultat(int id, String etudiantId, String noteQuran, String noteMouton, String noteGeneral,String commentaire) {
+		this.id = id;
+		this.etudiantId = etudiantId;
+		this.noteQuran = noteQuran;
+		this.noteMouton = noteMouton;
+		this.noteGeneral = noteGeneral;
+		this.commentaire = commentaire;
+//		this.noteAbsnce = noteAbsnce;
+	}
+    
 
-    public int getId() {
+	public Resultat(String etudiantId, String noteQuran, String noteMouton, String noteGeneral, String commentaire) {
+		this.etudiantId = etudiantId;
+		this.noteQuran = noteQuran;
+		this.noteMouton = noteMouton;
+		this.noteGeneral = noteGeneral;
+		this.commentaire = commentaire;
+//		this.noteAbsnce = noteAbsnce;
+	}
+
+
+	public int getId() {
         return id;
     }
 
@@ -46,13 +51,13 @@ public class Resultat implements Serializable{
         this.commentaire = commentaire;
     }
 
-    public String getNoteAbsnce() {
-        return noteAbsnce;
-    }
-
-    public void setNoteAbsnce(String noteAbsnce) {
-        this.noteAbsnce = noteAbsnce;
-    }
+//    public String getNoteAbsnce() {
+//        return noteAbsnce;
+//    }
+//
+//    public void setNoteAbsnce(String noteAbsnce) {
+//        this.noteAbsnce = noteAbsnce;
+//    }
 
     public String getNoteQuran() {
         return noteQuran;
@@ -85,4 +90,13 @@ public class Resultat implements Serializable{
     public void setEtudiantId(String etudiantId) {
         this.etudiantId = etudiantId;
     }
+
+	@Override
+	public String toString() {
+		return "Resultat [id=" + id + ", etudiantId=" + etudiantId + ", noteQuran=" + noteQuran + ", noteMouton="
+				+ noteMouton + ", noteGeneral=" + noteGeneral + ", commentaire=" + commentaire + "]";
+	}
+
+	
+    
 }
