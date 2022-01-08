@@ -1,6 +1,8 @@
 package Educative.Absences;
 
-public class Absences {
+import java.io.Serializable;
+
+public class Absences implements Serializable {
     private int id;
     private String dateAbsence;
     private String description;

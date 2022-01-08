@@ -2,6 +2,7 @@ package InterfaceGr.Prof;
 
 import Administrative.Etudiant.Etudiants;
 import ConnectionOracl.Connect;
+import Educative.Absences.AbsenceEtudiant;
 import Educative.Presences.PresenceEtudiant;
 import InterfaceGr.Etudiant.TraitementEtudaint;
 
@@ -26,7 +27,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 
-public class GraphiquesProf extends JFrame {
+public class GraphiquesProf extends JFrame implements Serializable{
+    static ObjectInputStream ois = null;
+    static ObjectOutputStream oos = null;
+    static AbsenceEtudiant abcense;
     Statement st;
     ResultSet rs;
     JPanel panel = new JPanel();
@@ -63,107 +67,21 @@ public class GraphiquesProf extends JFrame {
         df.addColumn("Sexe");
         df.addColumn("Filiere");
         table.setModel(df);
+        List<Etudiants> listEtudiant = new ArrayList<Etudiants>();
+        TraitementEtudaint listE = new TraitementEtudaint();
+        listEtudiant = listE.getAllElements();
 
-        String req="select * from etudiant";
-        try {
-            st=con.createStatement();
-            rs = st.executeQuery(req);
-            while (rs.next()){
-                df.addRow(new Object[]{
-                    rs.getString("ID"),
-                    rs.getString("NOM"),
-                    rs.getString("PRENOM"),
-                    rs.getString("Datnaissance"),
-                    rs.getString("Sexe"),
-                    rs.getString("Filiere")
-                });
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,"Erreur base de donnée !",null,JOptionPane.ERROR_MESSAGE);
+        for (int i=0; i<listEtudiant.size(); i++){
+
+            String id = listEtudiant.get(i).getId();
+            String nom = listEtudiant.get(i).getNom();
+            String prenom = listEtudiant.get(i).getPrenom();
+            String datNaissance = listEtudiant.get(i).getDatNaissance();
+            String sexe = listEtudiant.get(i).getSexe();
+            String filiere = listEtudiant.get(i).getFiliere();
+
+            df.addRow(new Object[]{id, nom, prenom, datNaissance, sexe, filiere});
         }
-/*
-        JLabel labelTitre2=new JLabel("Formulaire d'absences");
-        labelTitre2.setBounds(50,200,800,30);
-        labelTitre2.setFont(new Font("Arial",Font.BOLD,20));
-        panel.add(labelTitre2);
-
-        DefaultTableModel df1 = new DefaultTableModel();
-        init1();
-        panel.add(scroll2);
-
-        df1.addColumn("ID");
-        df1.addColumn("Nom");
-        df1.addColumn("Prenom");
-        df1.addColumn("Datnaissance");
-        df1.addColumn("Sexe");
-        df1.addColumn("Filiere");
-        table.setModel(df1);
-        String req1="select * from etudiant";
-
-        try {
-            List<Etudiants> listEtudiant = new ArrayList<>();
-            TraitementEtudaint listE = new TraitementEtudaint();
-            listEtudiant = listE.getAllElements();
-            Iterator<Etudiants> it = listEtudiant.iterator();
-
-            /*while (it.hasNext()){
-                df1.addRow(new Object[]{
-                    rs.getString("ID"),
-                    rs.getString("NOM"),
-                    rs.getString("PRENOM"),
-                    rs.getString("PRENOM"),
-                    rs.getString("PRENOM"),
-                    rs.getString("PRENOM")
-                });
-            }
-            String[] columns = new String[] {
-                    "ID", "Nom", "Prenom", "Datnaissance", "Sexe", "Filiere"
-            };
-            //DefaultTableModel tableModel = new DefaultTableModel(columns,0);
-            JTable table = new JTable();
-
-            String[][] data = null;
-
-        String id,nom,prenom,datNaissance,sexe;
-        Etudiants etu;
-            while (it.hasNext()){
-                etu = it.next();
-                id=etu.getId();
-                nom=etu.getNom();
-                prenom=etu.getPrenom();
-                datNaissance=etu.getDatNaissance();
-                sexe=etu.getSexe();
-                String filiere=etu.getFiliere();
-
-
-            }
-        for (int i=0, j=0;i< table.size();i+=2, j++){
-
-            data[j][0] = table.get(i);
-            data[j][1] = table.get(i+1);
-        }
-        init(data,columns);
-        panel.add(scroll1);
-        String[] entetes = new String[]{"Soiree", "Date", "NB Places Dispo", "Réserver"};
-
-        String[][] donnees = new String[8][8];
-
-        DefaultTableModel model = new DefaultTableModel(donnees,entetes);
-
-        JTable tableau = new JTable(donnees, entetes);
-*/
-
-        //
-
-            //DefaultTableModel df = new DefaultTableModel();
-
-            //panel.add(scroll1);
-
-        //} catch (SQLException e) {
-          //  JOptionPane.showMessageDialog(null,"Erreur base de donnée !",null,JOptionPane.ERROR_MESSAGE);
-        //}
-
-
 
         JLabel labelId = new JLabel("Etudiant ID ");
         labelId.setBounds(70,240,170,25);
@@ -224,7 +142,8 @@ public class GraphiquesProf extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                String etudiant_ID, nom, description, halaka_ID;
+                String nom, description;
+                String etudiant_ID, halaka_ID;
                 etudiant_ID = textId.getText();
                 halaka_ID = textHalaka.getText();
                 nom = textNom.getText().toLowerCase();
@@ -235,30 +154,23 @@ public class GraphiquesProf extends JFrame {
                 String dateSeance = localDateTime.format(formatter);
 
                 if(!etudiant_ID.equals("")&&!nom.equals("")&&!halaka_ID.equals("")) {
-
-                    final BufferedReader in;
-                    final PrintWriter out;
                     try {
-
                         Socket profSocket = new Socket("127.0.0.1", 5000);
-
                         //flux pour envoyer
-                        out = new PrintWriter(profSocket.getOutputStream());
-                        //flux pour recevoir
-                        in = new BufferedReader(new InputStreamReader(profSocket.getInputStream()));
-
                         Thread envoyer = new Thread(new Runnable() {
-
                             @Override
                             public void run() {
+                                try{
+                                    oos = new ObjectOutputStream(profSocket.getOutputStream());
+                                    ois = new ObjectInputStream(profSocket.getInputStream());
 
-                                out.println(dateSeance);
-                                out.println(description);
-                                out.println(etudiant_ID);
-                                out.println(halaka_ID);
-                                out.flush();
-                                System.out.println("done");
-
+                                    abcense = new AbsenceEtudiant(dateSeance, description, etudiant_ID, halaka_ID);
+                                    oos.writeObject(abcense);
+                                    System.out.println("done");
+                                    profSocket.close();
+                                }catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         });
                         envoyer.start();
@@ -301,8 +213,6 @@ public class GraphiquesProf extends JFrame {
         scroll1=new JScrollPane();
         scroll1.setBounds(200,70,600,120);
         scroll1.setViewportView(table);
-        //DefaultTableModel model = new DefaultTableModel(data,columns);
-        //JTable tableau = new JTable(data, columns);
     }
 
     private void init1(){

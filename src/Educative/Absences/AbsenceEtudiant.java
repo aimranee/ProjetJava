@@ -1,6 +1,8 @@
 package Educative.Absences;
 
-public class AbsenceEtudiant extends Absences{
+import java.io.Serializable;
+
+public class AbsenceEtudiant extends Absences implements Serializable {
     private String etudiantId;
     private String halakaId;
 
@@ -31,4 +33,5 @@ public class AbsenceEtudiant extends Absences{
         this.etudiantId = etudiantId;
         this.halakaId = halakaId;
     }
+
 }

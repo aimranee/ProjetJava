@@ -1,45 +1,44 @@
 package Serveur;
 
+import Administrative.Etudiant.Etudiants;
 import Educative.Absences.AbsenceEtudiant;
 import Educative.Presences.PresenceEtudiant;
 import InterfaceGr.Prof.TraitementProf;
 
 import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Serveur {
+public class Serveur implements Serializable{
+    static ServerSocket socketserver = null;
+    static Socket profSocket;
+    static ObjectInputStream ois = null;
+    static ObjectOutputStream oos = null;
+    static AbsenceEtudiant absence;
 
     public static void main(String[] test) {
 
-        final ServerSocket serveurSocket;
-        final Socket profSocket;
-        final BufferedReader in;
-        final PrintWriter out;
-
         try {
             System.out.println("syteme att...");
-            serveurSocket = new ServerSocket(5000);
-            profSocket = serveurSocket.accept();
-            System.out.println("client connecter");
-            out = new PrintWriter(profSocket.getOutputStream());
-            in = new BufferedReader (new InputStreamReader (profSocket.getInputStream()));
-
+            socketserver = new ServerSocket(5000);
+        while (true){
             Thread recevoir= new Thread(new Runnable() {
-                String msg ;
                 @Override
                 public void run() {
                     try {
+                        profSocket = socketserver.accept();
+                        System.out.println("client connecter");
+                        oos = new ObjectOutputStream(profSocket.getOutputStream());
+                        ois = new ObjectInputStream(profSocket.getInputStream());
+
+                        absence = (AbsenceEtudiant) ois.readObject();
                         //tant que le client est connecté
-                        String date = in.readLine();
-                        String desc = in.readLine();
-                        String etud = in.readLine();
-                        String hala = in.readLine();
+                        String date = absence.getDateAbsence();
+                        String desc = absence.getDescription();
+                        String etud = absence.getEtudiantId();
+                        String hala = absence.getHalakaId();
 
                         AbsenceEtudiant absence = new AbsenceEtudiant(date, desc, etud, hala);
                         TraitementProf trait = new TraitementProf();
@@ -48,9 +47,9 @@ public class Serveur {
                         //sortir de la boucle si le client a déconecté
                         System.out.println("Client déconecté");
                         //fermer le flux et la session socket
+                        profSocket.close();
 
-
-                    } catch (IOException e) {
+                    } catch (IOException | ClassNotFoundException e) {
                         e.printStackTrace();
                         try {
                             profSocket.close();
@@ -58,7 +57,7 @@ public class Serveur {
                             ex.printStackTrace();
                         }
                         try {
-                            serveurSocket.close();
+                            socketserver.close();
                         } catch (IOException ex) {
                             ex.printStackTrace();
                         }
@@ -66,6 +65,7 @@ public class Serveur {
                 }
             });
             recevoir.start();
+        }
         }catch (IOException e) {
             e.printStackTrace();
 
