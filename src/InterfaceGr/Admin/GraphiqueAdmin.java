@@ -41,10 +41,10 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 			this.setResizable(false);
 			this.setLocation(220,70);
 			
-				JPanel jp=new JPanel();
-				jp.setLayout(null);
-				jp.setBackground(Color.lightGray);
-				add(jp);
+			JPanel jp=new JPanel();
+			jp.setLayout(null);
+			jp.setBackground(Color.lightGray);
+			add(jp);
 				
 			lb1=new JLabel("Interface Gestion Etudiant");
 			lb1.setFont(new Font("Arial",Font.BOLD,20));
@@ -63,7 +63,7 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 			lb2=new JLabel("Id");
 			lb2.setFont(new Font("Arial",Font.BOLD,15));
 			lb2.setForeground(Color.blue);
-			lb2.setBounds(50,90,100,30);
+			lb2.setBounds(85,90,100,30);
 			jp.add(lb2);
 			
 			jtf2=new JTextField();
@@ -140,17 +140,17 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 	//les boutons
 						//insertion
 			jb1=new JButton("Insertion");
-			jb1.setBounds(130,390,90,30);
+			jb1.setBounds(100,390,120,30);
 			jb1.setForeground(Color.blue);
-			jb1.setBackground(Color.green);
+			jb1.setBackground(Color.orange);
 			jb1.addActionListener(this);
 			jp.add(jb1);
 			
 						//supression
 			jb2=new JButton("Suppression");
-			jb2.setBounds(240,390,110,30);
+			jb2.setBounds(240,390,120,30);
 			jb2.setForeground(Color.blue);
-			jb2.setBackground(new Color(250,100,0));
+			jb2.setBackground(Color.orange);
 			jb2.addActionListener(this);
 			jp.add(jb2);
 			

@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Administrative.Etudiant.Resultat;
 import ConnectionOracl.Connect;
+import InterfaceGr.Admin.requetesEtud.Requetes_liste;
 
 import java.sql.*;
 
@@ -136,8 +137,8 @@ public class GestionResultat extends JFrame  implements ActionListener{
 						// insertion
 		jb1=new JButton("Insertion_BD");
 		jb1.setBounds(100,390,110,30);
-		jb1.setForeground(Color.blue);
-		jb1.setBackground(Color.green);
+		jb1.setForeground(Color.BLACK);
+		jb1.setBackground(Color.orange);
 		jb1.addActionListener(this);
 		jp.add(jb1);
 		
@@ -145,8 +146,8 @@ public class GestionResultat extends JFrame  implements ActionListener{
 		
 		jb11=new JButton("Insertion_Fich");
 		jb11.setBounds(210,390,116,30);
-		jb11.setForeground(Color.blue);
-		jb11.setBackground(Color.green);
+		jb11.setForeground(Color.BLACK);
+		jb11.setBackground(Color.orange);
 		jb11.addActionListener(this);
 		jp.add(jb11);
 		
@@ -154,16 +155,16 @@ public class GestionResultat extends JFrame  implements ActionListener{
 		
 		jb2=new JButton("Supp");
 		jb2.setBounds(330,390,70,30);
-		jb2.setForeground(Color.blue);
-		jb2.setBackground(new Color(250,100,0));
+		jb2.setForeground(Color.BLACK);
+		jb2.setBackground(Color.orange);
 		jb2.addActionListener(this);
 		jp.add(jb2);
 		
 		//modification
 		
 		jb3=new JButton("Modification");
-		jb3.setBounds(240,440,120,30);
-		jb3.setForeground(Color.blue);
+		jb3.setBounds(250,440,130,30);
+		jb3.setForeground(Color.BLACK);
 		jb3.setBackground(Color.orange);
 		jb3.addActionListener(this);
 		jp.add(jb3);
@@ -180,7 +181,7 @@ public class GestionResultat extends JFrame  implements ActionListener{
 	//actualiser
 		
 		jb5=new JButton("Actualiser");
-		jb5.setBounds(100,440,120,30);
+		jb5.setBounds(100,440,130,30);
 		jb5.setForeground(Color.blue);
 		jb5.setBackground(Color.green);
 		jb5.addActionListener(this);
@@ -198,11 +199,18 @@ public class GestionResultat extends JFrame  implements ActionListener{
 		//Logout
 				
 			jb8=new JButton("Logout");
-			jb8.setBounds(250,490,110,30);
+			jb8.setBounds(250,490,130,30);
 			jb8.setForeground(Color.blue);
 			jb8.setBackground(Color.white);
 			jb8.addActionListener(this);
 			jp.add(jb8);
+			
+			jb9=new JButton("Liste des Requetes");
+			jb9.setBounds(99,530,150,30);
+			jb9.setForeground(Color.blue);
+			jb9.setBackground(Color.white);
+			jb9.addActionListener(this);
+			jp.add(jb9);
 				
 				DefaultTableModel df=new DefaultTableModel();
 				init();
@@ -363,6 +371,11 @@ public class GestionResultat extends JFrame  implements ActionListener{
 					loginForm logout =new loginForm();
 					logout.setVisible(true);
 				}
+			}
+			if(e.getSource()==jb9){
+				this.dispose();
+				Requetes_liste cr=new Requetes_liste();
+				cr.setVisible(true);
 			}
 	}
 }

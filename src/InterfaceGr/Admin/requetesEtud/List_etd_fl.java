@@ -30,22 +30,24 @@ public class List_etd_fl extends JFrame implements ActionListener{
 	ResultSet rst;
     Connection con = Connect.getCon();
 	public List_etd_fl(){
-			this.setTitle("chcode_appli");
+//        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+			this.setTitle("liste des etudiants par matiere ");
 			this.setSize(1000,600);
-			this.setLocation(350,30);
+			this.setLocation(280,70);
 			this.setResizable(false);
 			JPanel pn=new JPanel();
 			pn.setLayout(null);
 			pn.setBackground(Color.cyan);
 			add(pn);
 			//
-			lab1=new JLabel("LISTE DES ETUDIANTS PAR FILIERE");
-			lab1.setBounds(150,10,650,30);
+			lab1=new JLabel("LISTE DES ETUDIANTS PAR MATIERE");
+			lab1.setBounds(190,10,480,45);
 			lab1.setFont(new Font("Arial",Font.BOLD,25));
 			lab1.setBorder(BorderFactory.createLineBorder(Color.black));
 			pn.add(lab1);
 		//label1
-			lab1=new JLabel("FILIERE :");
+			lab1=new JLabel("MATIERE :");
 			lab1.setBounds(60,80,80,30);
 			lab1.setFont(new Font("Arial",Font.BOLD,15));
 			pn.add(lab1);
