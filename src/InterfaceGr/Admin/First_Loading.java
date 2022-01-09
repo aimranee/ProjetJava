@@ -1,6 +1,9 @@
 package InterfaceGr.Admin;
 
 import javax.swing.*;
+
+import Serveur.Serveur;
+
 import java.awt.*;
 
 public class First_Loading extends JFrame{
@@ -72,6 +75,8 @@ public class First_Loading extends JFrame{
     }
     public static void main(String[] args){
     	First_Loading fen = new First_Loading();
+    	Serveur ser = new Serveur();
+    	new Thread().start();
     	fen.setVisible(true);
         loginForm login = new loginForm();
         fen.dispose();

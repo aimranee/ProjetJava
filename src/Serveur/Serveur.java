@@ -40,7 +40,7 @@ public class Serveur implements Serializable{
                         String desc = absence.getDescription();
                         String etud = absence.getEtudiantId();
                         String hala = absence.getHalakaId();
-
+                        
                         AbsenceEtudiant absence = new AbsenceEtudiant(date, desc, etud, hala);
                         TraitementProf trait = new TraitementProf();
                         trait.createElement(absence);

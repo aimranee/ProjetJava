@@ -20,13 +20,13 @@ import ConnectionOracl.Connect;
 
 import java.sql.*;
 
-public class ListEtudiant extends JFrame implements ActionListener{
+public class Liste_Absence extends JFrame implements ActionListener{
 	
     Connection con = Connect.getCon();
-	public ListEtudiant(){
+	public Liste_Absence(){
 //        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 			
-			this.setTitle("liste des etudiants par matiere ");
+			this.setTitle("liste des Absences ");
 			this.setSize(1000,600);
 			this.setLocation(280,70);
 			this.setResizable(false);
@@ -35,23 +35,23 @@ public class ListEtudiant extends JFrame implements ActionListener{
 			pn.setBackground(Color.gray);
 			add(pn);
 			//
-			lab1=new JLabel("LISTE DES ETUDIANTS PAR MATIERE");
+			lab1=new JLabel("liste des Absences");
 			lab1.setBounds(190,10,480,45);
 			lab1.setForeground(Color.black);
-			lab1.setFont(new Font("Arial",Font.BOLD,25));
+			lab1.setFont(new Font("Arial",Font.BOLD,20));
 			lab1.setBorder(BorderFactory.createLineBorder(Color.black));
 			pn.add(lab1);
 		//label1
-			lab1=new JLabel("MATIERE :");
-			lab1.setBounds(60,80,80,30);
-			lab1.setFont(new Font("Arial",Font.BOLD,15));
-			pn.add(lab1);
-		//combo1
-			jcb1=new JComboBox();
-			jcb1.addItem("Quran");
-			jcb1.addItem("Mouton");
-			jcb1.setBounds(140,80,80,30);
-			pn.add(jcb1);
+//			lab1=new JLabel("MATIERE :");
+//			lab1.setBounds(60,80,80,30);
+//			lab1.setFont(new Font("Arial",Font.BOLD,15));
+//			pn.add(lab1);
+//		//combo1
+//			jcb1=new JComboBox();
+//			jcb1.addItem("Quran");
+//			jcb1.addItem("Mouton");
+//			jcb1.setBounds(140,80,80,30);
+//			pn.add(jcb1);
 		
 					jb1=new JButton("Recherche");
 					jb1.setBounds(640,80,100,30);
@@ -81,32 +81,32 @@ public class ListEtudiant extends JFrame implements ActionListener{
 	}
 		public static void main(String[] args){
 				
-			ListEtudiant ls=new ListEtudiant();
+			Liste_Absence ls=new Liste_Absence();
 				ls.setVisible(true);
 			}
 			
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==jb1){
-			String a;
-			a=jcb1.getSelectedItem().toString();
+//			String a;
+//			a=jcb1.getSelectedItem().toString();
 			DefaultTableModel df=new DefaultTableModel();
 			df.addColumn("ID");
-			df.addColumn("Nom");
-			df.addColumn("Prenom");
-			df.addColumn("DatNaissance");
-			df.addColumn("Sexe");
+			df.addColumn("DateAbsence");
+			df.addColumn("Description");
+			df.addColumn("EtudiantID");
+			df.addColumn("HalakaID");
 			tb.setModel(df);
-			String qry="select * from etudiant where filiere='"+a+"'";
+			String qry="select * from absenceetudiant ";
 				
 		try{
 			st=con.createStatement();
 			rst=st.executeQuery(qry);
 			while(rst.next()){
 				df.addRow(new Object[]{
-						rst.getString("id"),rst.getString("Nom"),
-						rst.getString("Prenom"),rst.getString("datNaissance")
-						,rst.getString("sexe")});
+						rst.getString("id"),rst.getString("DateAbsence"),
+						rst.getString("Description"),rst.getString("etudiantID")
+						,rst.getString("halaka_id")});
 			}
 		}
 		catch(SQLException ex){
