@@ -2,7 +2,7 @@ package Educative.Absences;
 
 import java.io.Serializable;
 
-public class AbsenceEtudiant extends Absences implements Serializable {
+public class AbsenceEtudiant extends Absences implements Serializable{
     private String etudiantId;
     private String halakaId;
 

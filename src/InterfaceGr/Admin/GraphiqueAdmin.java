@@ -24,7 +24,6 @@ import javax.swing.table.DefaultTableModel;
 import Administrative.Etudiant.Etudiants;
 import ConnectionOracl.Connect;
 import Educative.Absences.AbsenceEtudiant;
-import InterfaceGr.Admin.requetesEtud.Liste_Absence;
 import InterfaceGr.Etudiant.TraitementEtudaint;
 
 import java.sql.*;
@@ -187,13 +186,6 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 			jb8.setBackground(Color.gray);
 			jb8.addActionListener(this);
 			jpanelG.add(jb8);
-			
-			jb11=new JButton("Liste_Absence");
-			jb11.setBounds(100,540,120,30);
-			jb11.setForeground(Color.orange);
-			jb11.setBackground(Color.gray);
-			jb11.addActionListener(this);
-			jpanelG.add(jb11);
 
 		DefaultTableModel df=new DefaultTableModel();
 		init();
@@ -346,16 +338,11 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 				GestionResultat nt=new GestionResultat();
 				nt.setVisible(true);
 			}
-			if(e.getSource()==jb11){
-				Liste_Absence nt=new Liste_Absence();
-				nt.setVisible(true);
-			}
-			
 	}
 	
 	JLabel label0, label1,lb2,lb3,lb4,lb5,lb6,lb7,lb8,lb9;
 	JTextField jtf2,jtf3,jtf4,jtf5;
-	JButton jb1,jb2,jb3,jb4,jb5,jb7,jb8,jb9,jb10,jb11;
+	JButton jb1,jb2,jb3,jb4,jb5,jb7,jb8,jb9,jb10;
     JRadioButton rb1,rb2;
     JComboBox jcb,jcb2;
 	JTable tb;

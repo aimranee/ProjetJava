@@ -25,7 +25,7 @@ public class ListEtudiant extends JFrame implements ActionListener{
     Connection con = Connect.getCon();
 	public ListEtudiant(){
 //        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-			
+
 			this.setTitle("liste des etudiants par matiere ");
 			this.setSize(1000,600);
 			this.setLocation(280,70);

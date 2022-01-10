@@ -1,6 +1,8 @@
 package Administrative.Etudiant;
 
-public class Etudiants {
+import java.io.Serializable;
+
+public class Etudiants implements Serializable {
     private String id;
     private String nom;
     private String prenom;
