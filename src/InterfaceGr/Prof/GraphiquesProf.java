@@ -31,15 +31,15 @@ public class GraphiquesProf extends JFrame implements Serializable{
     static ObjectInputStream ois = null;
     static ObjectOutputStream oos = null;
     static AbsenceEtudiant abcense;
+    static Socket profSocket;
+    static List<Etudiants> listEtudiant;
     Statement st;
     ResultSet rs;
     JPanel panel = new JPanel();
     Connection con = Connect.getCon();
     JTable table,table1 = new JTable();
     JScrollPane scroll,scroll1,scroll2 = new JScrollPane();
-    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-
-    public GraphiquesProf() {
+    public GraphiquesProf() throws IOException, ClassNotFoundException {
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setTitle ("Page Prof");
@@ -67,21 +67,32 @@ public class GraphiquesProf extends JFrame implements Serializable{
         df.addColumn("Sexe");
         df.addColumn("Filiere");
         table.setModel(df);
-        List<Etudiants> listEtudiant = new ArrayList<Etudiants>();
-        TraitementEtudaint listE = new TraitementEtudaint();
-        listEtudiant = listE.getAllElements();
 
-        for (int i=0; i<listEtudiant.size(); i++){
 
-            String id = listEtudiant.get(i).getId();
-            String nom = listEtudiant.get(i).getNom();
-            String prenom = listEtudiant.get(i).getPrenom();
-            String datNaissance = listEtudiant.get(i).getDatNaissance();
-            String sexe = listEtudiant.get(i).getSexe();
-            String filiere = listEtudiant.get(i).getFiliere();
+        try {
+            profSocket = new Socket("127.0.0.1", 5000);
+            listEtudiant = new ArrayList<Etudiants>();
+            oos = new ObjectOutputStream(profSocket.getOutputStream());
+            ois = new ObjectInputStream(profSocket.getInputStream());
+            Object object = ois.readObject();
+            listEtudiant = (List<Etudiants>)object;
 
-            df.addRow(new Object[]{id, nom, prenom, datNaissance, sexe, filiere});
+            for (int i=0; i<listEtudiant.size(); i++){
+
+                String id = listEtudiant.get(i).getId();
+                String nom = listEtudiant.get(i).getNom();
+                String prenom = listEtudiant.get(i).getPrenom();
+                String datNaissance = listEtudiant.get(i).getDatNaissance();
+                String sexe = listEtudiant.get(i).getSexe();
+                String filiere = listEtudiant.get(i).getFiliere();
+
+                df.addRow(new Object[]{id, nom, prenom, datNaissance, sexe, filiere});
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null,"Erreur Serveur!!!",null,JOptionPane.ERROR_MESSAGE);
         }
+
+
 
         JLabel labelId = new JLabel("Etudiant ID ");
         labelId.setBounds(70,240,170,25);
@@ -155,36 +166,35 @@ public class GraphiquesProf extends JFrame implements Serializable{
 
                 if(!etudiant_ID.equals("")&&!nom.equals("")&&!halaka_ID.equals("")) {
                     try {
-                        Socket profSocket = new Socket("127.0.0.1", 5000);
-                        //flux pour envoyer
-                        Thread envoyer = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try{
-                                    oos = new ObjectOutputStream(profSocket.getOutputStream());
-                                    ois = new ObjectInputStream(profSocket.getInputStream());
+                        profSocket = new Socket("127.0.0.1", 5000);
 
-                                    abcense = new AbsenceEtudiant(dateSeance, description, etudiant_ID, halaka_ID);
-                                    oos.writeObject(abcense);
-                                    System.out.println("done");
-                                    profSocket.close();
-                                }catch (IOException e) {
-                                    e.printStackTrace();
-                                }
+                    //flux pour envoyer
+                    Thread envoyer = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try{
+                                oos = new ObjectOutputStream(profSocket.getOutputStream());
+                                ois = new ObjectInputStream(profSocket.getInputStream());
+
+                                abcense = new AbsenceEtudiant(dateSeance, description, etudiant_ID, halaka_ID);
+                                oos.writeObject(abcense);
+                                System.out.println("done");
+                                profSocket.close();
+                            }catch (IOException e) {
+                                e.printStackTrace();
                             }
-                        });
-                        envoyer.start();
-                        df1.addRow(new Object[]{
-                                etudiant_ID,
-                                nom,
-                                halaka_ID,
-                                dateSeance,
-                                description
-                        });
-
+                        }
+                    });
+                    envoyer.start();
+                    df1.addRow(new Object[]{
+                            etudiant_ID,
+                            nom,
+                            halaka_ID,
+                            dateSeance,
+                            description
+                    });
                     } catch (IOException ex) {
-                        ex.printStackTrace();
-                        JOptionPane.showMessageDialog(null,"ERREUR SERVER",null,JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null,"Erreur Serveur!!!",null,JOptionPane.ERROR_MESSAGE);
                     }
                 }else{
                     JOptionPane.showMessageDialog(null,"Completez le formulaire!",null,JOptionPane.ERROR_MESSAGE);
@@ -199,9 +209,16 @@ public class GraphiquesProf extends JFrame implements Serializable{
         btnActu.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ev){
                 dispose();
-                GraphiquesProf tb=new GraphiquesProf();
-                tb.setVisible(true);
+                GraphiquesProf tb= null;
+                try {
+                    tb = new GraphiquesProf();
+                } catch (IOException e) {
+                    e.printStackTrace();
 
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                tb.setVisible(true);
             }
         });
         panel.add(btnActu);
@@ -222,7 +239,7 @@ public class GraphiquesProf extends JFrame implements Serializable{
         scroll2.setViewportView(table1);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         GraphiquesProf prof = new GraphiquesProf();
         prof.setVisible(true);
     }
