@@ -40,7 +40,6 @@ public class Liste_Absence extends JFrame implements ActionListener{
 			lab1.setForeground(Color.black);
 			lab1.setFont(new Font("Arial",Font.BOLD,20));
 			lab1.setBorder(BorderFactory.createLineBorder(Color.black));
-			pn.add(lab1);
 		
 					jb1=new JButton("Recherche");
 					jb1.setBounds(640,80,100,30);
