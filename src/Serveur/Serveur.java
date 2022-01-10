@@ -92,10 +92,6 @@ public class Serveur implements Serializable{
                 envoie.start();
                 i=false;
             }
-
-
-
-
             //profSocket.close();
         }
         }catch (IOException e) {

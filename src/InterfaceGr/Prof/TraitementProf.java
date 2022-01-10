@@ -7,7 +7,6 @@ import Educative.Absences.AbsenceEtudiant;
 import javax.swing.*;
 import java.sql.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TraitementProf implements IDao<AbsenceEtudiant> {
