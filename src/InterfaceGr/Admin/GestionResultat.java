@@ -251,8 +251,8 @@ public class GestionResultat extends JFrame  implements ActionListener{
 			if(e.getSource()==jb1){
 				String ao,a,b,c,d,f;
 				a=jtf2.getText();b=jtf3.getText();c=jtf4.getText();d=jtf5.getText();f=jtf6.getText();
-				ao=jtfid.getText();
-			String qr="insert into resultat(id,EtudiantId,NoteQuran,NoteMouton,NoteGeneral,Commentaire) values('"+ao+"','"+a+"','"+b+"','"+c+"','"+d+"','"+f+"')";
+				//ao=jtfid.getText();
+			String qr="insert into resultat(id,EtudiantId,NoteQuran,NoteMouton,NoteGeneral,Commentaire) values(resultat_seq.nextval,'"+a+"','"+b+"','"+c+"','"+d+"','"+f+"')";
 			try{
 				st=con.createStatement();
 				if(JOptionPane.showConfirmDialog(this,"voulez vous insérer?",null,JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION){

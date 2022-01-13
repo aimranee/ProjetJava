@@ -36,13 +36,14 @@ public class Liste_Absence extends JFrame implements ActionListener{
 			add(pn);
 			//
 			lab1=new JLabel("liste des Absences");
-			lab1.setBounds(190,10,480,45);
+			lab1.setBounds(190,10,250,45);
 			lab1.setForeground(Color.black);
 			lab1.setFont(new Font("Arial",Font.BOLD,20));
-			lab1.setBorder(BorderFactory.createLineBorder(Color.black));
+			//lab1.setBorder(BorderFactory.createLineBorder(Color.black));
+			pn.add(lab1);
 		
-					jb1=new JButton("Recherche");
-					jb1.setBounds(640,80,100,30);
+					jb1=new JButton("ACTUALISER");
+					jb1.setBounds(640,80,120,30);
 					jb1.setBackground(Color.DARK_GRAY);
 					jb1.setForeground(Color.orange);
 					jb1.addActionListener(this);

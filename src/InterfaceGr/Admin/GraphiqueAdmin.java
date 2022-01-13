@@ -259,25 +259,28 @@ public class GraphiqueAdmin extends JFrame  implements ActionListener{
 					//suppression
 				
 				if(e.getSource()==jb2){
-					String a;
-					a=jtf2.getText();
+					int a;
+					a=Integer.parseInt(jtf2.getText());
 					TraitementEtudaint fen = new TraitementEtudaint();
-				String query="delete from etudiant where id='"+a+"'";
-				try{
-					st=con.createStatement();
-					if(JOptionPane.showConfirmDialog(this,"Voulez vous supprimer?",null,JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION){
-						st.executeUpdate(query);
-						JOptionPane.showMessageDialog(this,"Suppression reussie!");
-					}}
-				catch(SQLException ex){
-					JOptionPane.showMessageDialog(this,"Echec suppression!",null,JOptionPane.ERROR_MESSAGE);
-				}
+
+					//String query="delete from etudiant where id='"+a+"'";
+					try{
+						//st=con.createStatement();
+						if(JOptionPane.showConfirmDialog(this,"Voulez vous supprimer?",null,JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION){
+							//st.executeUpdate(query);
+							fen.suppElement(a);
+							JOptionPane.showMessageDialog(this,"Suppression reussie!");
+						}
+					}
+					catch(Exception ex){
+						JOptionPane.showMessageDialog(this,"Echec suppression!",null,JOptionPane.ERROR_MESSAGE);
+					}
 				}
 				
 				//modification
 				
 				if(e.getSource()==jb3){
-					String a,b,c,d,f,g,h;
+					String a,b,c,d,f,g;
 				a= jtf2.getText();b=jtf3.getText();c=jtf4.getText();d=jtf5.getText();
 				if(rb1.isSelected()) f=rb1.getText(); else f=rb2.getText();
 				g=jcb.getSelectedItem().toString();
