@@ -68,7 +68,6 @@ public class GraphiquesProf extends JFrame implements Serializable{
         df.addColumn("Filiere");
         table.setModel(df);
 
-
         try {
             profSocket = new Socket("127.0.0.1", 5000);
             listEtudiant = new ArrayList<Etudiants>();

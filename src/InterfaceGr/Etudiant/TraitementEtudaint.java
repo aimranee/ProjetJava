@@ -18,7 +18,7 @@ public class TraitementEtudaint implements IDao<Etudiants> {
     @Override
     public boolean createElement(Etudiants O) {
     	con = Connect.getCon();
-		String req = "insert into etudiant(Nom,Prenom,datNaissance,sexe,filiere) values(?,?,?,?,?)";
+		String req = "insert into etudiant(id,Nom,Prenom,datNaissance,sexe,filiere) values(etudiant_seq.nextval,?,?,?,?,?)";
 		try {
 			PreparedStatement ps = con.prepareStatement(req);
 			ps.setString(1,O.getNom());
@@ -57,12 +57,12 @@ public class TraitementEtudaint implements IDao<Etudiants> {
     }
 
     @Override
-    public boolean suppElement(Etudiants O) {
+    public boolean suppElement(int id) {
     	con = Connect.getCon();
 		String req = "delete from etudiant where id=?";
 		try {
 			PreparedStatement ps = con.prepareStatement(req);
-			ps.setString(1,O.getId());
+			ps.setInt(1, id);
 			ps.executeUpdate();
 			System.out.println("Bien supprimer");
 		    }catch(SQLException e) {

@@ -38,7 +38,7 @@ public class TraitementProf implements IDao<AbsenceEtudiant> {
     }
 
     @Override
-    public boolean suppElement(AbsenceEtudiant O) {
+    public boolean suppElement(int O) {
         return false;
     }
 
