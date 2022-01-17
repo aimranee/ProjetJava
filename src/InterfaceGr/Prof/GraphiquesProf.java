@@ -133,7 +133,7 @@ public class GraphiquesProf extends JFrame implements Serializable{
         LocalDateTime localDateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String dateSeance = localDateTime.format(formatter);
-
+        
         DefaultTableModel df1 = new DefaultTableModel();
         init1();
         panel.add(scroll2);
